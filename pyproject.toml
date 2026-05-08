@@ -1,0 +1,25 @@
+[project]
+name = "eosc-service-catalogue"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Enol Fernández", email = "enol.fernandez@egi.eu" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "black>=26.3.1",
+    "datamodel-code-generator[ruff]>=0.56.1",
+    "fastapi[standard]>=0.136.1",
+    "pyyaml>=6.0.3",
+]
+
+[project.scripts]
+eosc-service-catalogue = "eosc_service_catalogue:main"
+
+[build-system]
+requires = ["uv_build>=0.9.14,<0.10.0"]
+build-backend = "uv_build"
+
+[tool.fastapi]
+entrypoint = "eosc_service_catalogue.main:app"

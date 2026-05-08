@@ -1,0 +1,42 @@
+---
+id: egi-node:external:replay
+service:
+  id: egi-node:external:replay
+  abbreviation: Replay
+  name: Replay
+  webpage: https://www.egi.eu/services/replay/
+  description:
+    Replay allows reproducing and sharing custom computing environments for replicating
+    the execution of analysis in a notebooks-based platform. Based on the Binder
+    technology, Replay builds your environment on the fly from a code repository that
+    contains the code (e.g. notebook) you'd like to run and a set of configuration files
+    that determine the exact computing environment to run it. The service generates
+    shareable links for others to interact with your content easily from any browser,
+    reproduce your analysis and access data available in EGI's infrastructure.
+  tagline: Reproduce and share research on a notebooks-based platform
+  logo: https://cdn.egi.eu/app/uploads/2023/06/egi-icon-replay-SQ_T.png
+  scientificDomains:
+    - scientificDomain: scientific_domain-generic
+  categories:
+    - category: category-processing_and_analysis-data_analysis
+  targetUsers:
+    - target_user-research_communities
+    - target_user-research_groups
+    - target_user-research_projects
+  accessModes:
+    - access_mode-free_conditionally
+    - access_mode-paid
+  tags:
+    - Reproducible Research
+    - Binder
+    - Notebooks
+    - Interactive
+  languageAvailabilities:
+    - en
+  helpdeskEmail:
+  securityContactEmail:
+  trl: trl-9
+  userManual: https://docs.egi.eu/users/dev-env/replay/
+  termsOfUse: https://documents.egi.eu/public/ShowDocument?docid=2623
+  #accessPolicy:
+  orderType: order_type-order_required

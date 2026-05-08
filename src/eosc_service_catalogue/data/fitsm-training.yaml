@@ -1,0 +1,47 @@
+---
+id: egi-node:external:fitsm-training
+service:
+  id: egi-node:external:fitsm-training
+  abbreviation: FitSM
+  name: FitSM Training
+  webpage: https://www.egi.eu/services/fitsm-training/
+  description: |
+    With FitSM Training, you will learn the fundamentals of IT service management and
+    how to implement FitSM in your organisation through a combination of lessons and
+    examples.
+
+    FitSM is a lightweight standard for IT service management. It brings order and
+    traceability with simple, practical support and provides a common conceptual and
+    process model setting out realistic requirements.
+
+    The training programme is structured in three levels: Foundation, Advanced and
+    Expert and is accredited by APMG, a global leader in standardisation and
+    certification.
+
+    With FitSM training, you can:
+    - Increase your expertise in managing IT services
+    - Raise your professional profile with a recognised certification
+  tagline: Learn how to manage IT services with a pragmatic and lightweight standard
+  logo: https://cdn.egi.eu/app/uploads/2022/06/egi-icon-fitsm-training.png
+  scientificDomains:
+    - scientificDomain: scientific_domain-generic
+  categories:
+    - category: category-training_and_support-education_and_training
+  targetUsers:
+    - target_user-research_communities
+    - target_user-research_groups
+    - target_user-research_projects
+  accessModes:
+    - access_mode-free_conditionally
+    - access_mode-paid
+  tags:
+    - fitsm
+    - training
+  languageAvailabilities:
+    - en
+  helpdeskEmail:
+  securityContactEmail:
+  trl: trl-9
+  termsOfUse: https://www.egi.eu/services/fitsm-training/terms-and-conditions/
+  #accessPolicy:
+  orderType: order_type-order_required

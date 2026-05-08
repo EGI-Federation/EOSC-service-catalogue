@@ -1,0 +1,48 @@
+---
+id: egi-node:external:online-storage
+service:
+  id: egi-node:external:online-storage
+  abbreviation: Online Storage
+  name: Online Storage
+  webpage: https://www.egi.eu/services/online-storage/
+  description: |
+    Online Storage allows you to store data in a reliable and high-quality environment
+    and share it across distributed teams. Your data can be accessed through different
+    standard protocols and can be replicated across different providers to increase
+    fault-tolerance.
+
+    Online Storage gives you complete control over the data you share and with whom.
+
+    Main characteristics:
+    - Assign global identifiers to files
+    - Access highly-scalable storage from anywhere
+    - Control the data you share
+    - Organise your data using a flexible hierarchical structure
+  tagline: Store, share and access your files and their metadata on a global scale
+  logo: https://cdn.egi.eu/app/uploads/2022/06/egi-icon-online-storage.png
+  scientificDomains:
+    - scientificDomain: scientific_domain-generic
+  categories:
+    - category: category-access_physical_and_eInfrastructures-data_storage
+  targetUsers:
+    - target_user-research_communities
+    - target_user-research_groups
+    - target_user-research_projects
+  accessModes:
+    - access_mode-free_conditionally
+    - access_mode-paid
+  tags:
+    - Scientific Data
+    - storage
+    - file
+    - block
+    - object
+  languageAvailabilities:
+    - en
+  helpdeskEmail:
+  securityContactEmail:
+  trl: trl-9
+  userManual: https://docs.egi.eu/users/online-storage/
+  termsOfUse: https://documents.egi.eu/public/ShowDocument?docid=2623
+  #accessPolicy:
+  orderType: order_type-order_required

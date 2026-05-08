@@ -1,0 +1,54 @@
+---
+id: egi-node:external:datahub
+service:
+  id: egi-node:external:datahub
+  abbreviation: DataHub
+  name: DataHub
+  webpage: https://www.egi.eu/service/datahub/
+  description: |
+    The DataHub allows to:
+    - Bring data close to the computing to exploit it efficiently.
+    - Publish a dataset and make it available to a specific community or worldwide
+      across federated sites.
+
+    The main features offered by the DataHub are:
+    - Discovery of data via a central portal.
+    - Access to data conforming to required policies which may be:
+      - unauthenticated open access;
+      - access after user registration or
+      - access restricted to members of a Virtual Organization (VO).
+    - Access to data via GUI, POSIX, CDMI
+    - Replication of data from data providers for resiliency and availability purposes.
+      Replication may take place either on­-demand or automatically.
+    - Authentication and Authorization Infrastructure (AAI) integration between the
+      EGI DataHub and with other EGI components and with user communities existing
+      infrastructure.
+    - Metadata and shares management
+    - Data import and  data caching based on file popularity
+    - Support for many backends (CEPH, S3, GlusterFS, POSIX, etc)
+  tagline: Access key scientific datasets scalably
+  logo: https://cdn.egi.eu/app/uploads/2022/06/egi-icon-datahub.png
+  scientificDomains:
+    - scientificDomain: scientific_domain-generic
+  categories:
+    - category: category-processing_and_analysis-data_management
+  targetUsers:
+    - target_user-research_communities
+    - target_user-research_groups
+    - target_user-research_projects
+  accessModes:
+    - access_mode-free_conditionally
+    - access_mode-paid
+  tags:
+    - Distributed storage
+    - transfer
+    - API
+  languageAvailabilities:
+    - en
+  helpdeskEmail:
+  securityContactEmail:
+  trl: trl-9
+  userManual: https://docs.egi.eu/users/datahub/
+  termsOfUse: https://documents.egi.eu/public/ShowDocument?docid=2623
+  #accessPolicy:
+  orderType: order_type-order_required

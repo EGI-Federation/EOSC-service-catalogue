@@ -1,0 +1,60 @@
+---
+id: egi-node:external:iso-27001-training
+service:
+  id: egi-node:external:iso-27001-training
+  abbreviation: ISO 27001 Training
+  name: ISO 27001 Training
+  webpage: https://www.egi.eu/services/iso-27001-training/
+  description: |
+    ISO/IEC 27000 family - Information security management systems
+
+    The ISO IEC 27000 family of standards helps organizations keep information assets
+    secure. Using this family of standards will help your organization manage the
+    security of assets such as financial information, intellectual property, employee
+    details or information entrusted to you by third parties. ISO/IEC 27001 is the
+    best-known standard in the family providing requirements for an information
+    security management system (ISMS).
+
+    What is an ISMS?
+
+    An ISMS is a systematic approach to managing sensitive company information so that
+    it remains secure. It includes people, processes and IT systems by applying a risk
+    management process. It can help small, medium and large businesses in any sector
+    keep information assets secure.
+
+    ISO 27001 Certification
+
+    A formal personal certification is offered to all participants of the course that
+    successfully pass the final exam at the end of the course. The certification is
+    backed by certification authority ICO-Cert.
+  tagline:
+    A systematic approach to managing sensitive company information so that it remains
+    secure
+  logo: https://egi-api.nois3.net/app/uploads/2022/06/egi-icon-high-throughput-compute.png
+  scientificDomains:
+    - scientificDomain: scientific_domain-generic
+  categories:
+    - category: category-training_and_support-education_and_training
+  targetUsers:
+    - target_user-research_communities
+    - target_user-research_groups
+    - target_user-research_projects
+  accessModes:
+    - access_mode-paid
+  tags:
+    - training
+    - certification
+    - ISO
+    - security
+    - information security
+    - management
+    - ISO 27000
+    - ISO 27k
+  languageAvailabilities:
+    - en
+  helpdeskEmail:
+  securityContactEmail:
+  trl: trl-9
+  termsOfUse: https://www.egi.eu/services/fitsm-training/terms-and-conditions/
+  #accessPolicy:
+  orderType: order_type-order_required

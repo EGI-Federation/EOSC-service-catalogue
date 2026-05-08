@@ -1,0 +1,47 @@
+---
+id: egi-node:external:training-infrastructure
+service:
+  id: egi-node:external:training-infrastructure
+  #abbreviation: 
+  name: Training Infrastructure
+  webpage: https://www.egi.eu/service/training-infrastructure/
+  description: |
+    The Training Infrastructure is a cloud-based computing and storage resources for
+    training events. It is useful to organise onsite tutorials or workshops and online
+    training courses or as a platform for self-paced learning.
+
+    Trainers can deploy custom virtual machine images on the Training Infrastructure as
+    the training environment for the students. The virtual machines can be customised
+    according to specific needs and the community can benefit from the easy deployment
+    and easy reuse of course materials.
+
+    The Training Infrastructure uses the same high-quality computing and storage
+    environment that EGI provides to researchers.
+
+    Main characteristics:
+    - Target-specific courses and added value for scientific communities
+    - Easy-to-use, on-demand access and improvements in the training offer
+    - Allows easy deployment of courses and reuse
+  tagline: Dedicated cloud compute and online storage for training and education
+  logo: https://cdn.egi.eu/app/uploads/2022/06/egi-icon-training-infrastructure.png
+  scientificDomains:
+    - scientificDomain: scientific_domain-generic
+  categories:
+    - category: category-access_physical_and_eInfrastructures-compute
+  targetUsers:
+    - target_user-research_communities
+    - target_user-research_groups
+    - target_user-research_projects
+  accessModes:
+    - access_mode-free_conditionally
+    - access_mode-paid
+  tags:
+  languageAvailabilities:
+    - en
+  helpdeskEmail:
+  securityContactEmail:
+  trl: trl-9
+  userManual: https://docs.egi.eu/users/training/
+  termsOfUse: https://documents.egi.eu/public/ShowDocument?docid=2623
+  #accessPolicy:
+  orderType: order_type-order_required

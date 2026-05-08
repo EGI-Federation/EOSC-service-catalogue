@@ -1,0 +1,46 @@
+---
+id: egi-node:external:data-transfer
+service:
+  id: egi-node:external:data-transfer
+  abbreviation: DT
+  name: Data Trasfer
+  webpage: https://www.egi.eu/service/data-transfer/
+  description: |
+    Data Transfer allows you to move any type of data files asynchronously from one
+    place to another. The service includes dedicated interfaces to display statistics
+    of on-going transfers and manage network resources.
+
+    Data Transfer is ideal to move large amounts of files or very large files. The
+    Data Transfer service has mechanisms to ensure automatic retry in case of failure.
+
+    Main characteristics:
+    - Ideal for very large files
+    - Able to handle large amounts of files
+    - Transfer process with automatic retry
+  tagline: Transfer large sets of data from one place to another
+  logo: https://cdn.egi.eu/app/uploads/2022/06/egi-icon-data-transfer.png
+  scientificDomains:
+    - scientificDomain: scientific_domain-generic
+  categories:
+    - category: category-processing_and_analysis-data_management
+  targetUsers:
+    - target_user-research_communities
+    - target_user-research_groups
+    - target_user-research_projects
+  accessModes:
+    - access_mode-free_conditionally
+    - access_mode-paid
+  tags:
+    - Data transfer
+    - file movement
+    - network
+    - bulk transfer
+  languageAvailabilities:
+    - en
+  helpdeskEmail:
+  securityContactEmail:
+  trl: trl-9
+  userManual: https://docs.egi.eu/users/data-transfer/
+  termsOfUse: https://documents.egi.eu/public/ShowDocument?docid=2623
+  #accessPolicy:
+  orderType: order_type-order_required

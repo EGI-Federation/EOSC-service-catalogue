@@ -1,0 +1,55 @@
+---
+id: egi-node:external:cloud-container-compute
+service:
+  id: egi-node:external:cloud-container-compute
+  abbreviation: CCC
+  name: Cloud Container Compute
+  webpage: https://www.egi.eu/service/cloud-container-compute/
+  description: |
+    Cloud Container Compute gives users the ability to deploy and scale containerised
+    applications on demand, without having to manage the underlying infrastructure. It
+    provides guaranteed computational resources in a secure and isolated environment
+    with standard API access.
+
+    You can select containerised applications from an existing catalogue, browse
+    available container images, or bring your own. From a container image, you can
+    deploy a fully operational application in minutes, with automated provisioning,
+    scaling, and updates.
+
+    Containerised applications are lightweight, ensuring efficient performance. By
+    packaging all dependencies within container images, you avoid the need to
+    reconfigure applications across deployments.
+
+    With Cloud Container Compute you can:
+    - Easily deploy and update compute- and data-intensive applications
+    - Scale application resources manually or automatically, based on load
+    - Optimise performance with unified management, monitoring, and accounting
+    - Use container images and artefacts from the EGI Artefact Repository
+  tagline: Run containerized applications at scale
+  logo: https://cdn.egi.eu/app/uploads/2022/06/egi-icon-cloud-container-compute.png
+  scientificDomains:
+    - scientificDomain: scientific_domain-generic
+  categories:
+    - category: category-access_physical_and_eInfrastructures-compute
+  targetUsers:
+    - target_user-research_communities
+    - target_user-research_groups
+    - target_user-research_projects
+  accessModes:
+    - access_mode-free_conditionally
+    - access_mode-paid
+  tags:
+    - cloud compute
+    - container
+    - docker
+    - kubernetes
+    - k8s
+  languageAvailabilities:
+    - en
+  helpdeskEmail:
+  securityContactEmail:
+  trl: trl-8
+  userManual: https://docs.egi.eu/users/compute/cloud-container-compute/
+  termsOfUse: https://documents.egi.eu/public/ShowDocument?docid=2623
+  #accessPolicy:
+  orderType: order_type-order_required

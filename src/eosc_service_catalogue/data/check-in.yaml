@@ -1,0 +1,75 @@
+---
+id: egi-node:external:check-in
+service:
+  id: egi-node:external:check-in
+  abbreviation: Check-in
+  name: Check-in
+  webpage: https://www.egi.eu/services/check-in/
+  description: |
+    EGI Check-in is a comprehensive federated Identity and Access Management (IAM)
+    solution, developed in alignment with the AARC Blueprint Architecture (AARC-BPA).
+    It serves as a critical component for enabling secure and seamless access to
+    distributed e-infrastructure services and facilitating collaboration within the
+    scientific research community and across data spaces.
+
+    By integrating with EGI Check-in, users can authenticate using their institutional
+    credentials through eduGAIN, removing the need to create additional usernames or
+    passwords. For users without institutional accounts, EGI Check-in supports
+    authentication via alternative identity providers, including social media
+    platforms (e.g., Google, GitHub, LinkedIn, WeChat), research-centric providers
+    (e.g., ORCID), and other community-specific identity providers, such as
+    EGI SSO (Identity Provider of Last Resort) and IGTF X.509 certificates.
+
+    Key features of EGI Check-in include:
+    - Federated Identity Management: Enabling users to access resources with their
+      existing institutional or external accounts, ensuring a seamless user experience.
+    - Role and Attribute Management Facilitating fine-grained access control
+      by managing user roles, group memberships, and other authorization-related
+      attributes.
+    - Standards-Based Interoperability: Supporting open standards and
+      technologies such as SAML 2.0, OpenID Connect 1.0, OAuth 2.0, and
+      X.509v3 certificates, enabling integration with the Authentication and
+      Authorisation Infrastructures (AAIs) of other e-infrastructures, research
+      communities, and data spaces.
+    - Authentication Flexibility: Offering diverse authentication options to
+      accommodate a wide range of user needs, including:
+        - Institutional credentials via eduGAIN
+        - Researcher-specific accounts (e.g., ORCID)
+        - Social identity providers (e.g., Google, GitHub, LinkedIn, WeChat)
+        - Community-focused AAIs (e.g., B2ACCESS, eduTEAMS, SRAM, Umbrella, D4SCIENCE)
+        - Other fallback mechanisms, such as EGI SSO and IGTF certificates.
+
+    Complilance and Standards:
+      - Aligned with the AARC BPA for Authentication and Authorisation in
+        Research and Collaboration.
+      - Supports SAML, OIDC, and OAuth2 protocols.
+      - Publishes REFEDS R&S and Sirtfi compliance.
+      - GDPR compliant with regular security updates
+  tagline: Enabling Secure Access and Collaboration Across Research Services
+  logo: https://cdn.egi.eu/app/uploads/2022/06/egi-icon-check-in.png
+  scientificDomains:
+    - scientificDomain: scientific_domain-generic
+  categories:
+    - category: category-security_and_operations-security_and_identity
+  targetUsers:
+    - target_user-research_communities
+    - target_user-research_groups
+    - target_user-research_projects
+  accessModes:
+    - access_mode-free
+    - access_mode-paid
+  tags:
+    - Identity
+    - AAI
+    - authentication
+    - authorization
+    - group management
+  languageAvailabilities:
+    - en
+  helpdeskEmail:
+  securityContactEmail:
+  trl: trl-9
+  userManual: https://docs.egi.eu/users/check-in/
+  termsOfUse: https://documents.egi.eu/public/ShowDocument?docid=2623
+  ##accessPolicy:
+  orderType: order_type-order_required

@@ -1,0 +1,53 @@
+---
+id: egi-node:external:notebooks
+service:
+  id: egi-node:external:notebooks
+  abbreviation: Notebooks
+  name: Notebooks
+  webpage: https://www.egi.eu/services/notebooks/
+  description: |
+    The service provides a browser-based tool for interactive analysis of data using
+    EGI storage and compute infrastructures based on the JupyterHub technology. The
+    notebooks can combine text, mathematics, computations and their rich media output
+    using Jupyter technology, and can scale to multiple servers and multiple users
+    (hub) with the EGI cloud service.
+
+    The service is proposed in three options:
+    - Notebooks for Researchers: EGI hosts and offers a JupyterHub within the
+      Applications On Demand Service. Users (after lightweight approval) can login,
+      write and play notebooks using storage and compute capacity from the
+      access.egi.eu VO.
+    - Notebooks for Communities:  EGI offers consultancy and technology to set up a
+      community-specific JupyterHub on top of community VO (together with EGI-enabled
+      compute and storage resources), and with community-specific storage/data.
+    - On premises Notebooks for communities: EGI offers consultancy and technology to
+      set up a community-specific JupyterHub on top of resources owned by the community
+      (either belonging or not to the EGI infrastructure)  with community-specific
+      storage/data and other integrations (e.g. specific community AAI system)
+  tagline:
+    Create interactive documents with live code, visualisations and narrative text
+    powered by the Jupyter technology
+  logo: https://cdn.egi.eu/app/uploads/2022/06/egi-icon-notebooks.png
+  scientificDomains:
+    - scientificDomain: scientific_domain-generic
+  categories:
+    - category: category-processing_and_analysis-data_analysis
+  targetUsers:
+    - target_user-research_communities
+    - target_user-research_groups
+    - target_user-research_projects
+  accessModes:
+    - access_mode-free_conditionally
+    - access_mode-paid
+  tags:
+    - Jupyter
+    - notebook
+  languageAvailabilities:
+    - en
+  helpdeskEmail:
+  securityContactEmail:
+  trl: trl-9
+  userManual: https://docs.egi.eu/users/dev-env/notebooks/
+  termsOfUse: https://documents.egi.eu/public/ShowDocument?docid=2623
+  #accessPolicy:
+  orderType: order_type-order_required

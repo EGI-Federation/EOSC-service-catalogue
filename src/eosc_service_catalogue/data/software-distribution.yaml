@@ -1,0 +1,45 @@
+---
+id: egi-node:external:software-distribution
+service:
+  id: egi-node:external:software-distribution
+  #abbreviation:
+  name: Software Distribution
+  webpage: https://www.egi.eu/service/software-distribution/
+  description: |
+    Software Distribution is based on the well-known CernVM-File System (CernVM-FS),
+    providing a scalable, reliable and low- maintenance software distribution service.
+    It was developed to assist High Energy Physics (HEP) collaborations to deploy
+    software on the worldwide- distributed computing infrastructure used to run data
+    processing applications. CernVM-FS is implemented as a POSIX read-only file system
+    in user space (a FUSE module). Files and directories are hosted on standard web
+    servers and mounted in the universal namespace /cvmfs.
+
+    Software usually comprises many small files that are frequently opened and read as a
+    whole. Furthermore, software includes frequent look-ups for files in multiple
+    directories when search paths are examined. Through aggressive caching and reduction
+    of latency, CernVM-FS facilitates deployment of the software, necessary to process
+    experiment data, on distributed computing infrastructures. It replaces package
+    managers and shared software areas on cluster file systems.
+  tagline: Publish and access software efficiently across multiple sites
+  logo: https://cdn.egi.eu/app/uploads/2023/01/software-distribution.png
+  scientificDomains:
+    - scientificDomain: scientific_domain-generic
+  categories:
+    - category: category-access_physical_and_eInfrastructures-compute
+  targetUsers:
+    - target_user-research_communities
+    - target_user-research_groups
+    - target_user-research_projects
+  accessModes:
+    - access_mode-free_conditionally
+    - access_mode-paid
+  tags:
+  languageAvailabilities:
+    - en
+  helpdeskEmail:
+  securityContactEmail:
+  trl: trl-9
+  userManual: https://www.egi.eu/service/software-distribution/
+  termsOfUse: https://documents.egi.eu/public/ShowDocument?docid=2623
+  #accessPolicy:
+  orderType: order_type-order_required

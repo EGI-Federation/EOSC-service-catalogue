@@ -1,0 +1,42 @@
+---
+id: egi-node:external:infrastructure-manager
+service:
+  id: egi-node:external:infrastructure-manager
+  abbreviation: IM
+  name: Infrastructure Manager
+  webpage: https://www.egi.eu/service/infrastructure-manager/
+  description:
+    Infrastructure Manager (IM) is an open-source service that deploys complex and
+    customised virtual infrastructures on multiple clouds. IM automates the deployment,
+    configuration, software installation, monitoring and update of virtual
+    infrastructures. It supports a wide variety of public and on-premises Cloud
+    back-ends, thus making user applications Cloud agnostic. In addition, it features
+    DevOps capabilities, based on Ansible to enable the installation and configuration
+    of all the user required applications providing the user with a fully functional
+    infrastructure.
+  tagline:
+    Use cloud orchestrator to deploy and configure complex virtual infrastructures
+  logo: https://cdn.egi.eu/app/uploads/2023/06/egi-icon-infrastructure-manager-SQ_W.jpg
+  scientificDomains:
+    - scientificDomain: scientific_domain-generic
+  categories:
+    - category: category-access_physical_and_eInfrastructures-compute
+  targetUsers:
+    - target_user-research_communities
+    - target_user-research_groups
+    - target_user-research_projects
+  accessModes:
+    - access_mode-free
+  tags:
+    - Virtual infrastructures
+    - cloud orchestrator
+    - TOSCA
+  languageAvailabilities:
+    - en
+  helpdeskEmail:
+  securityContactEmail:
+  trl: trl-9
+  userManual: https://docs.egi.eu/users/compute/orchestration/im/
+  termsOfUse: https://documents.egi.eu/public/ShowDocument?docid=2623
+  #accessPolicy:
+  orderType: order_type-open_access

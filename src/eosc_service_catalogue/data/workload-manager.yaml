@@ -1,0 +1,42 @@
+---
+id: egi-node:external:workload-manager
+service:
+  id: egi-node:external:workload-manager
+  abbreviation: WM
+  name: Workload Manager
+  webpage: https://www.egi.eu/service/workload-manager/
+  description: |
+    With the Workload Manager you can manage and distribute your computing tasks in an
+    efficient way while maximising the usage of computational resource.
+
+    The Workload Manager is based on DIRAC technology and is suitable for users that
+    need to exploit distributed resources in a transparent way. The service has a
+    user-friendly interface and also allows easy extensions for the needs of specific
+    applications via APIs.
+
+    Main characteristics:
+    - Job submission management and workload distribution in an optimised way
+    - Supports both cloud and grid capacities
+    - User-friendly interface and open architecture
+  tagline: Manage computing workloads in an efficient way
+  logo: https://egi-api.nois3.net/app/uploads/2022/06/egi-icon-high-throughput-compute.png
+  scientificDomains:
+    - scientificDomain: scientific_domain-generic
+  categories:
+    - category: category-access_physical_and_eInfrastructures-compute
+  targetUsers:
+    - target_user-research_communities
+    - target_user-research_groups
+    - target_user-research_projects
+  accessModes:
+    - access_mode-free_conditionally
+  tags:
+  languageAvailabilities:
+    - en
+  helpdeskEmail:
+  securityContactEmail:
+  trl: trl-9
+  userManual: https://docs.egi.eu/users/workload-manager/
+  termsOfUse: https://documents.egi.eu/public/ShowDocument?docid=2623
+  #accessPolicy:
+  orderType: order_type-order_required

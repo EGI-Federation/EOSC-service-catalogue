@@ -3,8 +3,10 @@
 #   timestamp: 2026-05-08T10:47:24+00:00
 
 from __future__ import annotations
-from pydantic import AnyUrl, BaseModel, ConfigDict, EmailStr, Field, RootModel, constr
+
 from enum import Enum
+
+from pydantic import AnyUrl, BaseModel, ConfigDict, EmailStr, Field, RootModel, constr
 
 
 class NonEmptyString(RootModel[constr(min_length=1)]):

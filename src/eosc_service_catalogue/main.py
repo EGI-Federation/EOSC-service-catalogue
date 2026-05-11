@@ -13,19 +13,15 @@ Params:
 - sort: String (Field to use for ordering) [optional
 """
 
-from fastapi import FastAPI
 from enum import Enum
-
-from pydantic_core import from_json
-
-import yaml
-
-app = FastAPI()
-
-
 from importlib.resources import files
 
+import yaml
+from fastapi import FastAPI
+
 from . import model
+
+app = FastAPI()
 
 
 def load_services() -> list[model.EoscServiceBundleSchemaV3]:

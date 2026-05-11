@@ -1,6 +1,8 @@
 ---
 name: Check links
 
+permissions: read-all
+
 on:
   push:
   pull_request:

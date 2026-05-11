@@ -48,7 +48,7 @@ service:
 ingress:
   enabled: true
   className: nginx
-  annotations: {}
+  annotations:
     kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/custom-http-errors: "589"
   hosts:

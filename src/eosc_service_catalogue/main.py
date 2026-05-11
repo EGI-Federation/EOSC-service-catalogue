@@ -25,6 +25,7 @@ app = FastAPI()
 
 
 def load_services() -> list[model.EoscServiceBundleSchemaV3]:
+    """Loads the services from the data files"""
     services = []
     for svc_file in files("eosc_service_catalogue.data").iterdir():
         try:
@@ -58,4 +59,5 @@ def services(
     - order: String (Order of results - asc/desc, default asc) [optional]
     - sort: String (Field to use for ordering) [optional
     """
+    print(keyword, from_change_me, quantity, order, sort)
     return load_services()

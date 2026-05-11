@@ -1,0 +1,6 @@
+apiVersion: v2
+name: eosc-service-registry
+description: A chart for deploying the EOSC Service Catalogue of the EGI Node 
+type: application
+version: 0.1.0
+appVersion: "0.0.1"

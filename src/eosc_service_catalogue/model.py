@@ -68,7 +68,7 @@ class LanguageCode(Enum):
     ff = "ff"
     fi = "fi"
     fj = "fj"
-    fo = "fo" # codespell:ignore
+    fo = "fo"  # codespell:ignore
     fr = "fr"
     fy = "fy"
     ga = "ga"
@@ -134,7 +134,7 @@ class LanguageCode(Enum):
     my = "my"
     na = "na"
     nb = "nb"
-    nd = "nd" # codespell:ignore
+    nd = "nd"  # codespell:ignore
     ne = "ne"
     ng = "ng"
     nl = "nl"
@@ -148,7 +148,7 @@ class LanguageCode(Enum):
     om = "om"
     or_ = "or"
     os = "os"
-    ot = "ot" # codespell:ignore
+    ot = "ot"  # codespell:ignore
     pa = "pa"
     pi = "pi"
     pl = "pl"
@@ -179,7 +179,7 @@ class LanguageCode(Enum):
     sv = "sv"
     sw = "sw"
     ta = "ta"
-    te = "te" # codespell:ignore wrod
+    te = "te"  # codespell:ignore wrod
     tg = "tg"
     th = "th"
     ti = "ti"

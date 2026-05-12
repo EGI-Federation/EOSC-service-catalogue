@@ -52,6 +52,7 @@ ingress:
   annotations:
     kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/custom-http-errors: "589"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
   hosts:
     - host: egi-eosc-catalogue.dyn.cloud.e-infra.cz 
       paths:

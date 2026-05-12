@@ -9,8 +9,8 @@ from enum import Enum
 from pydantic import AnyUrl, BaseModel, ConfigDict, EmailStr, Field, RootModel, constr
 
 
-class NonEmptyString(RootModel[constr(min_length=1)]):
-    root: constr(min_length=1)
+class NonEmptyString(RootModel[constr(min_length=1)]):  # type: ignore
+    root: constr(min_length=1)  # type: ignore
 
 
 class URI(RootModel[AnyUrl]):
@@ -918,8 +918,8 @@ class ScientificSubdomainId(RootModel[ScientificSubdomainId1 | None]):
     root: ScientificSubdomainId1 | None
 
 
-class Tag(RootModel[constr(min_length=1)]):
-    root: constr(min_length=1)
+class Tag(RootModel[constr(min_length=1)]):  # type: ignore
+    root: constr(min_length=1)  # type: ignore
 
 
 class AlternativeIdentifier(BaseModel):

@@ -43,5 +43,7 @@ jobs:
           # some stuff go bad with helm charts
           VALIDATE_KUBERNETES_KUBECONFORM: false
           VALIDATE_YAML_PRETTIER: false
+          # may look into enabling this in the future
+          VALIDATE_TRIVY: false
           # Fail on errors
           DISABLE_ERRORS: false

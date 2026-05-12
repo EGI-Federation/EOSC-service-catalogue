@@ -2,7 +2,7 @@
 
 ## Maintainers
 
-Full Name <email>
+Enol Fernandez <enol.fernandez@egi.eu>
 
 ## Contributors
 

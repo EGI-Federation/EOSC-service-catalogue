@@ -9,8 +9,8 @@ from enum import Enum
 from pydantic import AnyUrl, BaseModel, ConfigDict, EmailStr, Field, RootModel, constr
 
 
-class NonEmptyString(RootModel[constr(min_length=1)]):
-    root: constr(min_length=1)
+class NonEmptyString(RootModel[constr(min_length=1)]):  # type: ignore
+    root: constr(min_length=1)  # type: ignore
 
 
 class URI(RootModel[AnyUrl]):
@@ -68,7 +68,7 @@ class LanguageCode(Enum):
     ff = "ff"
     fi = "fi"
     fj = "fj"
-    fo = "fo"
+    fo = "fo"  # codespell:ignore
     fr = "fr"
     fy = "fy"
     ga = "ga"
@@ -134,7 +134,7 @@ class LanguageCode(Enum):
     my = "my"
     na = "na"
     nb = "nb"
-    nd = "nd"
+    nd = "nd"  # codespell:ignore
     ne = "ne"
     ng = "ng"
     nl = "nl"
@@ -148,7 +148,7 @@ class LanguageCode(Enum):
     om = "om"
     or_ = "or"
     os = "os"
-    ot = "ot"
+    ot = "ot"  # codespell:ignore
     pa = "pa"
     pi = "pi"
     pl = "pl"
@@ -179,7 +179,7 @@ class LanguageCode(Enum):
     sv = "sv"
     sw = "sw"
     ta = "ta"
-    te = "te"
+    te = "te"  # codespell:ignore
     tg = "tg"
     th = "th"
     ti = "ti"
@@ -918,8 +918,8 @@ class ScientificSubdomainId(RootModel[ScientificSubdomainId1 | None]):
     root: ScientificSubdomainId1 | None
 
 
-class Tag(RootModel[constr(min_length=1)]):
-    root: constr(min_length=1)
+class Tag(RootModel[constr(min_length=1)]):  # type: ignore
+    root: constr(min_length=1)  # type: ignore
 
 
 class AlternativeIdentifier(BaseModel):

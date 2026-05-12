@@ -3,7 +3,7 @@ id: egi-node:external:data-transfer
 service:
   id: egi-node:external:data-transfer
   abbreviation: DT
-  name: Data Trasfer
+  name: Data Transfer
   webpage: https://www.egi.eu/service/data-transfer/
   description: |
     Data Transfer allows you to move any type of data files asynchronously from one

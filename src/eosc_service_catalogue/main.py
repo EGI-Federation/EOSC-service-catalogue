@@ -47,7 +47,7 @@ def services(
     keyword: str | None = None,
     from_change_me: int | None = 0,
     quantity: int | None = 10,
-    order: OrderEnum | None = "asc",
+    order: OrderEnum | None = OrderEnum.asc,
     sort: str | None = None,
 ) -> list[model.EoscServiceBundleSchemaV3]:
     """Get a list of Service profiles based on a set of filters.

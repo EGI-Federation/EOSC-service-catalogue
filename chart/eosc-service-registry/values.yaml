@@ -1,0 +1,86 @@
+# Default values for eosc-service-registry.
+# This is a YAML-formatted file.
+
+replicaCount: 1
+
+# This sets the container image more information can be found here: https://kubernetes.io/docs/concepts/containers/images/
+image:
+  repository: registry.egi.eu/cloud.egi.eu/eosc-registry-catalogue
+  # This sets the pull policy for images.
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+# secrets for image pulling
+imageCredentials: {}
+
+# This is for setting Kubernetes Annotations to a Pod.
+# For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+podAnnotations: {}
+# This is for setting Kubernetes Labels to a Pod.
+# For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+podLabels: {}
+
+securityContext: 
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+  runAsNonRoot: true
+  runAsUser: 1000
+  runAsGroup: 1000
+  seccompProfile:
+    type: RuntimeDefault
+
+podSecurityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+# This is for setting up a service more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/
+service:
+  type: ClusterIP
+  port: 8080
+
+# This block is for setting up the ingress for more information can be found here: https://kubernetes.io/docs/concepts/services-networking/ingress/
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/custom-http-errors: "589"
+  hosts:
+    - host: egi-eosc-catalogue.dyn.cloud.e-infra.cz 
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+     - secretName: eosc-catalogue-tls
+       hosts:
+         - egi-eosc-catalogue.dyn.cloud.e-infra.cz
+
+resources:
+   limits:
+     cpu: 100m
+     memory: 128Mi
+   requests:
+     cpu: 100m
+     memory: 128Mi
+
+livenessProbe:
+  httpGet:
+    path: /docs
+    port: http
+readinessProbe:
+  httpGet:
+    path: /docs
+    port: http
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

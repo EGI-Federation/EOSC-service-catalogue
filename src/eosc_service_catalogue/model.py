@@ -179,7 +179,7 @@ class LanguageCode(Enum):
     sv = "sv"
     sw = "sw"
     ta = "ta"
-    te = "te"  # codespell:ignore wrod
+    te = "te"  # codespell:ignore
     tg = "tg"
     th = "th"
     ti = "ti"

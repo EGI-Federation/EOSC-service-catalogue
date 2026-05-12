@@ -2,9 +2,8 @@
 name: Build and push containers
 
 on:
-  push:
-    branches:
-      - main
+  release:
+    - released
   pull_request:
 
 permissions: read-all

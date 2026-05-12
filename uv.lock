@@ -144,18 +144,26 @@ name = "eosc-service-catalogue"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
-    { name = "black" },
-    { name = "datamodel-code-generator", extra = ["ruff"] },
     { name = "fastapi", extra = ["standard"] },
     { name = "pyyaml" },
 ]
 
+[package.dev-dependencies]
+dev = [
+    { name = "black" },
+    { name = "datamodel-code-generator", extra = ["ruff"] },
+]
+
 [package.metadata]
 requires-dist = [
-    { name = "black", specifier = ">=26.3.1" },
-    { name = "datamodel-code-generator", extras = ["ruff"], specifier = ">=0.56.1" },
     { name = "fastapi", extras = ["standard"], specifier = ">=0.136.1" },
     { name = "pyyaml", specifier = ">=6.0.3" },
+]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "black", specifier = ">=26.3.1" },
+    { name = "datamodel-code-generator", extras = ["ruff"], specifier = ">=0.56.1" },
 ]
 
 [[package]]

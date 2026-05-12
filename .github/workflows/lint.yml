@@ -36,6 +36,8 @@ jobs:
           VALIDATE_PYTHON_PYLINT: false
           # this will scream about line too long and we already have ruff
           VALIDATE_PYTHON_FLAKE8: false
+          # in conflict with black
+          VALIDATE_PYTHON_RUFF_FORMAT: false
           # there is a lot of copy paste in the services
           VALIDATE_JSCPD: false
           # in conflict with biome

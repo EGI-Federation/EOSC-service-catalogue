@@ -50,13 +50,13 @@ app.kubernetes.io/name: {{ include "eosc-service-registry.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
+
 {{/*
-Create the name of the service account to use
+Pull Secrets
+Taken from https://helm.sh/docs/howto/charts_tips_and_tricks/#creating-image-pull-secrets
 */}}
-{{- define "eosc-service-registry.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create }}
-{{- default (include "eosc-service-registry.fullname" .) .Values.serviceAccount.name }}
-{{- else }}
-{{- default "default" .Values.serviceAccount.name }}
+{{- define "imagePullSecret" }}
+{{- with .Values.imageCredentials }}
+{{- printf "{\"auths\":{\"%s\":{\"username\":\"%s\",\"password\":%s,\"email\":\"%s\",\"auth\":\"%s\"}}}" .registry .username (.password | quote) .email (printf "%s:%s" .username .password | b64enc) | b64enc }}
 {{- end }}
 {{- end }}

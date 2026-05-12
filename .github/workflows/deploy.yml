@@ -31,4 +31,4 @@ jobs:
           echo "$KUBECONFIG" > ~/.kube/config
           echo "$IMAGE_PULL_CREDENTIALS" > config.yaml
           helm upgrade --install eosc-svc ./chart/eosc-service-registry/ -n egi-ops-portal-ns \
-            -f config.yaml
+            -f config.yaml --set image.tag="sha-$(git rev-parse --short HEAD)"

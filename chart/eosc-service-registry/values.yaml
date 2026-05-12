@@ -5,7 +5,7 @@ replicaCount: 1
 
 # This sets the container image more information can be found here: https://kubernetes.io/docs/concepts/containers/images/
 image:
-  repository: registry.egi.eu/cloud.egi.eu/eosc-registry-service
+  repository: registry.egi.eu/cloud.egi.eu/eosc-registry-catalogue
   # This sets the pull policy for images.
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.

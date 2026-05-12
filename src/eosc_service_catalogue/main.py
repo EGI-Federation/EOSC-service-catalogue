@@ -28,6 +28,8 @@ def load_services() -> list[model.EoscServiceBundleSchemaV3]:
     """Loads the services from the data files"""
     services = []
     for svc_file in files("eosc_service_catalogue.data").iterdir():
+        if not svc_file.name.endswith(".yaml"):
+            continue
         try:
             svc = yaml.load(svc_file.read_text(), Loader=yaml.SafeLoader)
             services.append(model.EoscServiceBundleSchemaV3.model_validate(svc))

@@ -35,9 +35,10 @@ jobs:
         uses: docker/setup-qemu-action@ce360397dd3f832beb865e1373c09c0e9f86d70a
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@4d04d5d9486b7bd6fa91e7baf45bbb4f8b9deedd
-      - name: Login to DockerHub
+      - name: Login to Registry 
         uses: docker/login-action@4907a6ddec9925e35a0a9e82d7399ccc52663121
         with:
+          registry: registry.egi.eu
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_TOKEN }}
         if: github.event_name != 'pull_request'
@@ -48,3 +49,18 @@ jobs:
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
           context: .
+      - name: Get helm
+        uses: azure/setup-helm@dda3372f752e03dde6b3237bc9431cdc2f7a02a2
+        if: github.event_name != 'pull_request'
+      - name: deploy 
+        env:
+          KUBECONFIG: ${{ secrets.KUBECONFIG }}
+          IMAGE_PULL_CREDENTIALS: ${{ secrets.IMAGE_PULL_CREDENTIALS }}
+        run: |
+          mkdir ~/.kube
+          echo "$KUBECONFIG" > ./kubeconfig
+          export KUBECONFIG="./kubeconfig"
+          echo "$IMAGE_PULL_CREDENTIALS" > config.yaml
+          helm upgrade --install eosc-svc ./chart/eosc-service-registry/ -n egi-ops-portal-ns \
+            -f config.yaml --set image.tag="sha-$(git rev-parse --short HEAD)"
+        if: github.event_name != 'pull_request'

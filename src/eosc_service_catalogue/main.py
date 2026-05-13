@@ -13,7 +13,6 @@ Params:
 - sort: String (Field to use for ordering) [optional
 """
 
-from enum import Enum
 from importlib.resources import files
 
 import yaml

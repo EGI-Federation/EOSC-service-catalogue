@@ -2,7 +2,6 @@
 id: egi-node:external:cloud-compute
 service:
   id: egi-node:external:cloud-compute
-  abbreviation: CC
   name: Cloud Compute
   webpage: https://www.egi.eu/service/cloud-compute/
   description: |
@@ -44,10 +43,10 @@ service:
     - vm
   languageAvailabilities:
     - en
-  helpdeskEmail:
+  helpdeskEmail: cloud-compute-support@mailman.egi.eu
   securityContactEmail:
   trl: trl-9
   userManual: https://docs.egi.eu/users/compute/cloud-compute/
-  termsOfUse: https://documents.egi.eu/public/ShowDocument?docid=2623
-  #accessPolicy:
+  termsOfUse: https://www.egi.eu/terms-of-use/
+  accessPolicy: https://www.egi.eu/services/research/#access-policies
   orderType: order_type-order_required

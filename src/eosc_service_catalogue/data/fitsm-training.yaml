@@ -43,5 +43,5 @@ service:
   securityContactEmail:
   trl: trl-9
   termsOfUse: https://www.egi.eu/services/fitsm-training/terms-and-conditions/
-  #accessPolicy:
+  accessPolicy: https://www.egi.eu/services/research/#access-policies
   orderType: order_type-order_required

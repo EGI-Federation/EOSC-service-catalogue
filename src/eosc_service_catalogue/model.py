@@ -6,7 +6,8 @@ from __future__ import annotations
 
 from enum import Enum
 
-from pydantic import AnyUrl, BaseModel, ConfigDict, EmailStr, Field, RootModel, constr
+from pydantic import (AnyUrl, BaseModel, ConfigDict, EmailStr, Field,
+                      RootModel, constr)
 
 
 class NonEmptyString(RootModel[constr(min_length=1)]):  # type: ignore
@@ -926,10 +927,10 @@ class AlternativeIdentifier(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    type: NonEmptyString | None = Field(
-        None, description="Type of the identifier (e.g. doi, hdl)."
+    type: str = Field(
+        min_length=1, description="Type of the identifier (e.g. doi, hdl)."
     )
-    value: NonEmptyString = Field(..., description="Identifier value.")
+    value: str = Field(min_length=1, description="Identifier value.")
 
 
 class ScientificDomainEntry(BaseModel):
@@ -952,22 +953,20 @@ class Service(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    id: NonEmptyString = Field(
-        ..., description="Service identifier (same as service bundle ID)."
+    id: str = Field(..., description="Service identifier (same as service bundle ID).")
+    alternativeIdentifiers: list[AlternativeIdentifier] = Field(
+        None, description="Alternative identifiers for the service.", min_length=0
     )
-    alternativeIdentifiers: list[AlternativeIdentifier] | None = Field(
-        None, description="Alternative identifiers for the service.", min_length=1
+    abbreviation: str | None = Field(
+        None, description="Abbreviation of the service name.", min_length=1
     )
-    abbreviation: NonEmptyString | None = Field(
-        None, description="Abbreviation of the service name."
-    )
-    name: NonEmptyString = Field(..., description="Full name of the service.")
+    name: str = Field(..., description="Full name of the service.", min_length=1)
     webpage: URI = Field(..., description="URL of the service webpage.")
-    description: NonEmptyString = Field(
-        ..., description="Detailed description of the service."
+    description: str = Field(
+        ..., description="Detailed description of the service.", min_length=1
     )
-    tagline: NonEmptyString | None = Field(
-        None, description="Short tagline summarising the service."
+    tagline: str | None = Field(
+        description="Short tagline summarising the service.", min_length=1
     )
     logo: URI | None = Field(None, description="URL of the service logo.")
     scientificDomains: list[ScientificDomainEntry] = Field(
@@ -982,9 +981,7 @@ class Service(BaseModel):
     accessModes: list[AccessMode] | None = Field(
         None, description="Access mode provided by the service.", min_length=1
     )
-    tags: list[Tag] | None = Field(
-        None, description="Free-text tags for the service.", min_length=1
-    )
+    tags: list[str] = Field(description="Free-text tags for the service.", min_length=0)
     languageAvailabilities: list[LanguageCode] = Field(
         ...,
         description="Languages available for the service (ISO 639-1 codes).",

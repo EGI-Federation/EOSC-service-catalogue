@@ -6,19 +6,7 @@ from __future__ import annotations
 
 from enum import Enum
 
-from pydantic import AnyUrl, BaseModel, ConfigDict, EmailStr, Field, RootModel, constr
-
-
-class NonEmptyString(RootModel[constr(min_length=1)]):  # type: ignore
-    root: constr(min_length=1)  # type: ignore
-
-
-class URI(RootModel[AnyUrl]):
-    root: AnyUrl
-
-
-class Email(RootModel[EmailStr]):
-    root: EmailStr
+from pydantic import AnyUrl, BaseModel, ConfigDict, EmailStr, Field, RootModel
 
 
 class LanguageCode(Enum):
@@ -774,7 +762,7 @@ class SubcategoryId(RootModel[SubcategoryId1 | None]):
     root: SubcategoryId1 | None
 
 
-class ScientificDomainId(Enum):
+class ScientificDomains(Enum):
     scientific_domain_agricultural_sciences = "scientific_domain-agricultural_sciences"
     scientific_domain_engineering_and_technology = (
         "scientific_domain-engineering_and_technology"
@@ -789,7 +777,7 @@ class ScientificDomainId(Enum):
     scientific_domain_social_sciences = "scientific_domain-social_sciences"
 
 
-class ScientificSubdomainId1(Enum):
+class ScientificSubdomains(Enum):
     scientific_subdomain_agricultural_sciences_agricultural_biotechnology = (
         "scientific_subdomain-agricultural_sciences-agricultural_biotechnology"
     )
@@ -914,30 +902,22 @@ class ScientificSubdomainId1(Enum):
     )
 
 
-class ScientificSubdomainId(RootModel[ScientificSubdomainId1 | None]):
-    root: ScientificSubdomainId1 | None
-
-
-class Tag(RootModel[constr(min_length=1)]):  # type: ignore
-    root: constr(min_length=1)  # type: ignore
-
-
 class AlternativeIdentifier(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    type: NonEmptyString | None = Field(
-        None, description="Type of the identifier (e.g. doi, hdl)."
+    type: str = Field(
+        min_length=1, description="Type of the identifier (e.g. doi, hdl)."
     )
-    value: NonEmptyString = Field(..., description="Identifier value.")
+    value: str = Field(min_length=1, description="Identifier value.")
 
 
 class ScientificDomainEntry(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    scientificDomain: ScientificDomainId
-    scientificSubdomain: ScientificSubdomainId | None = None
+    scientificDomain: ScientificDomains
+    scientificSubdomain: ScientificSubdomains | None = None
 
 
 class ServiceCategoryEntry(BaseModel):
@@ -952,24 +932,22 @@ class Service(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    id: NonEmptyString = Field(
-        ..., description="Service identifier (same as service bundle ID)."
+    id: str = Field(..., description="Service identifier (same as service bundle ID).")
+    alternativeIdentifiers: list[AlternativeIdentifier] = Field(
+        None, description="Alternative identifiers for the service.", min_length=0
     )
-    alternativeIdentifiers: list[AlternativeIdentifier] | None = Field(
-        None, description="Alternative identifiers for the service.", min_length=1
+    abbreviation: str | None = Field(
+        None, description="Abbreviation of the service name.", min_length=1
     )
-    abbreviation: NonEmptyString | None = Field(
-        None, description="Abbreviation of the service name."
+    name: str = Field(..., description="Full name of the service.", min_length=1)
+    webpage: AnyUrl = Field(..., description="URL of the service webpage.")
+    description: str = Field(
+        ..., description="Detailed description of the service.", min_length=1
     )
-    name: NonEmptyString = Field(..., description="Full name of the service.")
-    webpage: URI = Field(..., description="URL of the service webpage.")
-    description: NonEmptyString = Field(
-        ..., description="Detailed description of the service."
+    tagline: str | None = Field(
+        description="Short tagline summarising the service.", min_length=1
     )
-    tagline: NonEmptyString | None = Field(
-        None, description="Short tagline summarising the service."
-    )
-    logo: URI | None = Field(None, description="URL of the service logo.")
+    logo: AnyUrl | None = Field(None, description="URL of the service logo.")
     scientificDomains: list[ScientificDomainEntry] = Field(
         ..., description="Scientific domains applicable to the service.", min_length=1
     )
@@ -982,31 +960,33 @@ class Service(BaseModel):
     accessModes: list[AccessMode] | None = Field(
         None, description="Access mode provided by the service.", min_length=1
     )
-    tags: list[Tag] | None = Field(
-        None, description="Free-text tags for the service.", min_length=1
+    tags: list[str] | None = Field(
+        description="Free-text tags for the service.", min_length=0
     )
     languageAvailabilities: list[LanguageCode] = Field(
         ...,
         description="Languages available for the service (ISO 639-1 codes).",
         min_length=1,
     )
-    helpdeskEmail: Email | None = Field(None, description="Helpdesk contact email.")
-    securityContactEmail: Email | None = Field(
+    helpdeskEmail: EmailStr | None = Field(None, description="Helpdesk contact email.")
+    securityContactEmail: EmailStr | None = Field(
         None, description="Security contact email."
     )
     trl: TRL = Field(..., description="Technology readiness level.")
-    userManual: URI | None = Field(None, description="URL for the user manual.")
-    termsOfUse: URI | None = Field(None, description="URL for the terms of use.")
-    privacyPolicy: URI | None = Field(None, description="URL for the privacy policy.")
-    accessPolicy: URI | None = Field(None, description="URL for the access policy.")
+    userManual: AnyUrl | None = Field(None, description="URL for the user manual.")
+    termsOfUse: AnyUrl | None = Field(None, description="URL for the terms of use.")
+    privacyPolicy: AnyUrl | None = Field(
+        None, description="URL for the privacy policy."
+    )
+    accessPolicy: AnyUrl | None = Field(None, description="URL for the access policy.")
     orderType: OrderType = Field(..., description="Ordering modality for the service.")
 
 
-class EoscServiceBundleSchemaV3(BaseModel):
+class EOSCServiceBundle(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    id: NonEmptyString = Field(
-        ..., description="Unique identifier for the service bundle."
+    id: str = Field(
+        ..., description="Unique identifier for the service bundle.", min_length=1
     )
     service: Service = Field(..., description="Metadata of the catalogued service.")

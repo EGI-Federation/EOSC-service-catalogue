@@ -43,27 +43,29 @@ def load_services() -> list[model.EOSCServiceBundle]:
     return _egi_service_bundle
 
 
-def keyword_filter(keyword: str):
+def keyword_filter(keyword: str | None):
+    if not keyword:
+        return lambda x: True
+
     def check_keyword(svc: model.EOSCServiceBundle):
-        if any(keyword.casefold() in tag.casefold() for tag in svc.service.tags):
-            return True
+        if svc.service.tags:
+            if any(keyword.casefold() in tag.casefold() for tag in svc.service.tags):
+                return True
         return any(
             keyword.casefold() in (txt.casefold() if txt else "")
             for txt in (svc.service.name, svc.service.description, svc.service.tagline)
         )
 
-    if not keyword:
-        return lambda x: True
-    else:
-        return check_keyword
+    return check_keyword
 
 
-def service_sorter(sort_field: str = ""):
+def service_sorter(sort_field: str | None = ""):
+    if not sort_field:
+        sort_field = "id"
+
     def get_field(svc: model.EOSCServiceBundle):
         return getattr(svc.service, sort_field)
 
-    if not sort_field:
-        sort_field = "id"
     return get_field
 
 
@@ -109,13 +111,22 @@ def services(
         key=service_sorter(sort_field),
         reverse=(order == "desc"),
     )
-    # return indexing as requested
     total = len(bundle)
-    if from_ >= total:
+    if not total:
+        return ServicesResponse(
+            total=0,
+            from_=0,
+            to=0,
+            results=[],
+        )
+    start = from_ if from_ else 0
+    quantity = quantity if quantity else total
+    end = min(start + quantity, total - 1)
+    if start >= total:
         raise HTTPException(status_code=400, detail=f"Invalid 'from' value: {from_}")
     return ServicesResponse(
         total=total,
-        from_=from_,
-        to=min(from_ + quantity, total - 1),
-        results=bundle[from_ : from_ + quantity],
+        from_=start,
+        to=end,
+        results=bundle[start:end],
     )

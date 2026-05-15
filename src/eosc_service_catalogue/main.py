@@ -36,9 +36,7 @@ def load_services() -> list[model.EOSCServiceBundle]:
                 continue
             try:
                 svc = yaml.load(svc_file.read_text(), Loader=yaml.SafeLoader)
-                _egi_service_bundle.append(
-                    model.EOSCServiceBundle.model_validate(svc)
-                )
+                _egi_service_bundle.append(model.EOSCServiceBundle.model_validate(svc))
             except Exception as e:
                 print(e)
                 continue
@@ -107,7 +105,9 @@ def services(
     # keyword filter
     # sort and filter by keyword
     bundle = sorted(
-        filter(keyword_filter(keyword), load_services()), key=service_sorter(sort_field)
+        filter(keyword_filter(keyword), load_services()),
+        key=service_sorter(sort_field),
+        reverse=(order == "desc"),
     )
     # return indexing as requested
     total = len(bundle)

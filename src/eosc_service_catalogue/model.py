@@ -5,21 +5,9 @@
 from __future__ import annotations
 
 from enum import Enum
+from typing import Optional
 
-from pydantic import (AnyUrl, BaseModel, ConfigDict, EmailStr, Field,
-                      RootModel, constr)
-
-
-class NonEmptyString(RootModel[constr(min_length=1)]):  # type: ignore
-    root: constr(min_length=1)  # type: ignore
-
-
-class URI(RootModel[AnyUrl]):
-    root: AnyUrl
-
-
-class Email(RootModel[EmailStr]):
-    root: EmailStr
+from pydantic import AnyUrl, BaseModel, ConfigDict, EmailStr, Field, RootModel
 
 
 class LanguageCode(Enum):
@@ -775,7 +763,7 @@ class SubcategoryId(RootModel[SubcategoryId1 | None]):
     root: SubcategoryId1 | None
 
 
-class ScientificDomainId(Enum):
+class ScientificDomains(Enum):
     scientific_domain_agricultural_sciences = "scientific_domain-agricultural_sciences"
     scientific_domain_engineering_and_technology = (
         "scientific_domain-engineering_and_technology"
@@ -790,7 +778,7 @@ class ScientificDomainId(Enum):
     scientific_domain_social_sciences = "scientific_domain-social_sciences"
 
 
-class ScientificSubdomainId1(Enum):
+class ScientificSubdomains(Enum):
     scientific_subdomain_agricultural_sciences_agricultural_biotechnology = (
         "scientific_subdomain-agricultural_sciences-agricultural_biotechnology"
     )
@@ -915,14 +903,6 @@ class ScientificSubdomainId1(Enum):
     )
 
 
-class ScientificSubdomainId(RootModel[ScientificSubdomainId1 | None]):
-    root: ScientificSubdomainId1 | None
-
-
-class Tag(RootModel[constr(min_length=1)]):  # type: ignore
-    root: constr(min_length=1)  # type: ignore
-
-
 class AlternativeIdentifier(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
@@ -937,8 +917,8 @@ class ScientificDomainEntry(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    scientificDomain: ScientificDomainId
-    scientificSubdomain: ScientificSubdomainId | None = None
+    scientificDomain: ScientificDomains
+    scientificSubdomain: ScientificSubdomains | None = None
 
 
 class ServiceCategoryEntry(BaseModel):
@@ -961,14 +941,14 @@ class Service(BaseModel):
         None, description="Abbreviation of the service name.", min_length=1
     )
     name: str = Field(..., description="Full name of the service.", min_length=1)
-    webpage: URI = Field(..., description="URL of the service webpage.")
+    webpage: AnyUrl = Field(..., description="URL of the service webpage.")
     description: str = Field(
         ..., description="Detailed description of the service.", min_length=1
     )
     tagline: str | None = Field(
         description="Short tagline summarising the service.", min_length=1
     )
-    logo: URI | None = Field(None, description="URL of the service logo.")
+    logo: AnyUrl | None = Field(None, description="URL of the service logo.")
     scientificDomains: list[ScientificDomainEntry] = Field(
         ..., description="Scientific domains applicable to the service.", min_length=1
     )
@@ -981,29 +961,33 @@ class Service(BaseModel):
     accessModes: list[AccessMode] | None = Field(
         None, description="Access mode provided by the service.", min_length=1
     )
-    tags: list[str] = Field(description="Free-text tags for the service.", min_length=0)
+    tags: list[str] | None = Field(
+        description="Free-text tags for the service.", min_length=0
+    )
     languageAvailabilities: list[LanguageCode] = Field(
         ...,
         description="Languages available for the service (ISO 639-1 codes).",
         min_length=1,
     )
-    helpdeskEmail: Email | None = Field(None, description="Helpdesk contact email.")
-    securityContactEmail: Email | None = Field(
+    helpdeskEmail: EmailStr | None = Field(None, description="Helpdesk contact email.")
+    securityContactEmail: EmailStr | None = Field(
         None, description="Security contact email."
     )
     trl: TRL = Field(..., description="Technology readiness level.")
-    userManual: URI | None = Field(None, description="URL for the user manual.")
-    termsOfUse: URI | None = Field(None, description="URL for the terms of use.")
-    privacyPolicy: URI | None = Field(None, description="URL for the privacy policy.")
-    accessPolicy: URI | None = Field(None, description="URL for the access policy.")
+    userManual: AnyUrl | None = Field(None, description="URL for the user manual.")
+    termsOfUse: AnyUrl | None = Field(None, description="URL for the terms of use.")
+    privacyPolicy: AnyUrl | None = Field(
+        None, description="URL for the privacy policy."
+    )
+    accessPolicy: AnyUrl | None = Field(None, description="URL for the access policy.")
     orderType: OrderType = Field(..., description="Ordering modality for the service.")
 
 
-class EoscServiceBundleSchemaV3(BaseModel):
+class EOSCServiceBundle(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    id: NonEmptyString = Field(
-        ..., description="Unique identifier for the service bundle."
+    id: str = Field(
+        ..., description="Unique identifier for the service bundle.", min_length=1
     )
     service: Service = Field(..., description="Metadata of the catalogued service.")

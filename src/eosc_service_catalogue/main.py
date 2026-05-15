@@ -24,10 +24,10 @@ from . import model
 
 app = FastAPI()
 
-_egi_service_bundle: list[model.EoscServiceBundleSchemaV3] = []
+_egi_service_bundle: list[model.EOSCServiceBundle] = []
 
 
-def load_services() -> list[model.EoscServiceBundleSchemaV3]:
+def load_services() -> list[model.EOSCServiceBundle]:
     """Loads the services from the data files"""
     global _egi_service_bundle
     if not _egi_service_bundle:
@@ -37,7 +37,7 @@ def load_services() -> list[model.EoscServiceBundleSchemaV3]:
             try:
                 svc = yaml.load(svc_file.read_text(), Loader=yaml.SafeLoader)
                 _egi_service_bundle.append(
-                    model.EoscServiceBundleSchemaV3.model_validate(svc)
+                    model.EOSCServiceBundle.model_validate(svc)
                 )
             except Exception as e:
                 print(e)
@@ -46,7 +46,7 @@ def load_services() -> list[model.EoscServiceBundleSchemaV3]:
 
 
 def keyword_filter(keyword: str):
-    def check_keyword(svc: model.EoscServiceBundleSchemaV3):
+    def check_keyword(svc: model.EOSCServiceBundle):
         if any(keyword.casefold() in tag.casefold() for tag in svc.service.tags):
             return True
         return any(
@@ -61,7 +61,7 @@ def keyword_filter(keyword: str):
 
 
 def service_sorter(sort_field: str = ""):
-    def get_field(svc: model.EoscServiceBundleSchemaV3):
+    def get_field(svc: model.EOSCServiceBundle):
         return getattr(svc.service, sort_field)
 
     if not sort_field:
@@ -75,7 +75,7 @@ class ServicesResponse(BaseModel):
         serialization_alias="from", description="Index of the first service returned"
     )
     to: int = Field(description="Index of the last service returned")
-    results: list[model.EoscServiceBundleSchemaV3] = Field(description="Results")
+    results: list[model.EOSCServiceBundle] = Field(description="Results")
 
 
 @app.get("/services")

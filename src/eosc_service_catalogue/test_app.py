@@ -15,4 +15,4 @@ def test_validate_services_data():
             continue
         print(f"Loading {svc_file}")
         svc = yaml.load(svc_file.read_text(), Loader=yaml.SafeLoader)
-        assert model.EoscServiceBundleSchemaV3.model_validate(svc)
+        assert model.EOSCServiceBundle.model_validate(svc)

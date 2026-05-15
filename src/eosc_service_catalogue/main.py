@@ -88,7 +88,9 @@ def services(
         ge=0,
     ),
     quantity: Optional[int] = Query(
-        -1, description="Quantity to be fetched, -1 gets all records (default -1)", ge=-1
+        -1,
+        description="Quantity to be fetched, -1 gets all records (default -1)",
+        ge=-1,
     ),
     order: Optional[Literal["asc", "desc"]] = Query(
         "asc", description="Order of results: 'asc' or 'desc' (default: 'asc')"

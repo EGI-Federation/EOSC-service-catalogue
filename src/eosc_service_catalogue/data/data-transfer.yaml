@@ -7,17 +7,15 @@ service:
   webpage: https://www.egi.eu/service/data-transfer/
   description: |
     Data Transfer allows you to move any type of data files asynchronously from one
-    place to another. The service includes dedicated interfaces to display statistics
-    of on-going transfers and manage network resources.
-
-    Data Transfer is ideal to move large amounts of files or very large files. The
-    Data Transfer service has mechanisms to ensure automatic retry in case of failure.
-
+    storage location to another using different protocols (HTTP/Webdav, gsiftp, XRootD)
+    The Data Transfer service has mechanisms to ensure automatic retry in case of failure and optimize transfer bandwith.
+    The service includes dedicated interfaces to display statistics of on-going transfers and manage network resources.
+    
     Main characteristics:
     - Ideal for very large files
     - Able to handle large amounts of files
     - Transfer process with automatic retry
-  tagline: Transfer large sets of data from one place to another
+  tagline: Transfer large sets of data from one storage location to another
   logo: https://cdn.egi.eu/app/uploads/2022/06/egi-icon-data-transfer.png
   scientificDomains:
     - scientificDomain: scientific_domain-generic

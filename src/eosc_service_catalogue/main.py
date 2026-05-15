@@ -88,7 +88,7 @@ def services(
         ge=0,
     ),
     quantity: Optional[int] = Query(
-        10, description="Quantity to be fetched (default 10)", ge=0
+        -1, description="Quantity to be fetched, -1 gets all records (default -1)", ge=-1
     ),
     order: Optional[Literal["asc", "desc"]] = Query(
         "asc", description="Order of results: 'asc' or 'desc' (default: 'asc')"
@@ -120,10 +120,16 @@ def services(
             results=[],
         )
     start = from_ if from_ else 0
-    quantity = quantity if quantity else total
-    end = min(start + quantity, total - 1)
+    if quantity is None:
+        quantity = -1
+    if not quantity:
+        raise HTTPException(
+            status_code=400, detail=f"Invalid 'quantity' field: {quantity}"
+        )
     if start >= total:
         raise HTTPException(status_code=400, detail=f"Invalid 'from' value: {from_}")
+    quantity = quantity if quantity != -1 else total
+    end = min(start + quantity, total - 1)
     return ServicesResponse(
         total=total,
         from_=start,

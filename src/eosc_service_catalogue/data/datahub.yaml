@@ -17,7 +17,7 @@ service:
       - unauthenticated open access;
       - access after user registration or
       - access restricted to members of a Virtual Organization (VO).
-    - Access to data via GUI, POSIX, CDMI
+    - Access to data via GUI, POSIX, HTTP, S3, CDMI
     - Replication of data from data providers for resiliency and availability purposes.
       Replication may take place either on­-demand or automatically.
     - Authentication and Authorization Infrastructure (AAI) integration between the

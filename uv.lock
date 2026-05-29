@@ -204,7 +204,7 @@ requires-dist = [
 [package.metadata.requires-dev]
 dev = [
     { name = "black", specifier = ">=26.3.1" },
-    { name = "datamodel-code-generator", extras = ["ruff"], specifier = ">=0.56.1" },
+    { name = "datamodel-code-generator", extras = ["ruff"], specifier = ">=0.57.0" },
     { name = "pytest", specifier = ">=9.0.3" },
     { name = "pytest-cov", specifier = ">=7.1.0" },
 ]

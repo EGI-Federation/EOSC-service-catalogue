@@ -6,19 +6,16 @@ service:
   name: Online Storage
   webpage: https://www.egi.eu/services/online-storage/
   description: |
-    Online Storage allows you to store data in a reliable and high-quality environment
-    and share it across distributed teams. Your data can be accessed through different
-    standard protocols and can be replicated across different providers to increase
-    fault-tolerance.
+    The Online Storage service offers different options for data storage: 
+    - Object storage:  manages data as objects and allows relatively inexpensive, 
+    scalable and self-healing retention of massive amounts of unstructured data 
+    - File Storage : Highly scalable storage system accessible from anywhere allowing to easily 
+    share data through different standard interfaces. It assigns global identifiers to files and allows to organise
+    your data using a flexible hierarchical structure.
+    - Block Storage:  block-level storage solution that allows you
+    to expand the storage capacity of your instances in the EGI Federated Cloud.
 
-    Online Storage gives you complete control over the data you share and with whom.
-
-    Main characteristics:
-    - Assign global identifiers to files
-    - Access highly-scalable storage from anywhere
-    - Control the data you share
-    - Organise your data using a flexible hierarchical structure
-  tagline: Store, share and access your files and their metadata on a global scale
+  tagline: Store, share and access your files on a global scale
   logo: https://cdn.egi.eu/app/uploads/2022/06/egi-icon-online-storage.png
   scientificDomains:
     - scientificDomain: scientific_domain-generic

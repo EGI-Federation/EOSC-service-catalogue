@@ -27,6 +27,10 @@ app = FastAPI()
 _egi_service_bundle: list[model.EOSCServiceBundle] = []
 
 
+def mystrip(desc: str) -> str:
+    return "".join(map(lambda x: x.strip() if x else "\n", desc.split("\n")))
+
+
 def load_services() -> list[model.EOSCServiceBundle]:
     """Loads the services from the data files"""
     global _egi_service_bundle
@@ -36,6 +40,7 @@ def load_services() -> list[model.EOSCServiceBundle]:
                 continue
             try:
                 svc = yaml.load(svc_file.read_text(), Loader=yaml.SafeLoader)
+                # we do a bit of magic here with the description to avoid weird formatting
                 _egi_service_bundle.append(model.EOSCServiceBundle.model_validate(svc))
             except Exception as e:
                 print(e)

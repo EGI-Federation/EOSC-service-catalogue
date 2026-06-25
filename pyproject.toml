@@ -8,7 +8,7 @@ authors = [
 ]
 requires-python = ">=3.14"
 dependencies = [
-    "fastapi[standard]>=0.136.3",
+    "fastapi[standard]>=0.137.1",
     "pyyaml>=6.0.3",
 ]
 
@@ -16,7 +16,7 @@ dependencies = [
 eosc-service-catalogue = "eosc_service_catalogue:main"
 
 [build-system]
-requires = ["uv_build>=0.11.20,<0.12.0"]
+requires = ["uv_build>=0.11.21,<0.12.0"]
 build-backend = "uv_build"
 
 [tool.fastapi]
@@ -25,7 +25,6 @@ entrypoint = "eosc_service_catalogue.main:app"
 [dependency-groups]
 dev = [
     "black>=26.5.1",
-    "datamodel-code-generator[ruff]>=0.58.0",
-    "pytest>=9.0.3",
+    "pytest>=9.1.0",
     "pytest-cov>=7.1.0",
 ]

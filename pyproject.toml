@@ -25,7 +25,6 @@ entrypoint = "eosc_service_catalogue.main:app"
 [dependency-groups]
 dev = [
     "black>=26.5.1",
-    "datamodel-code-generator[ruff]>=0.58.0",
     "pytest>=9.1.0",
     "pytest-cov>=7.1.0",
 ]

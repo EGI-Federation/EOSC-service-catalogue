@@ -4,7 +4,7 @@ service:
   id: egi-node:external:cloud-compute
   name: Cloud Compute
   webpage: https://www.egi.eu/service/cloud-compute/
-  description: |
+  description: >>>
     Cloud Compute gives you the ability to deploy and scale virtual machines on-demand.
     It offers guaranteed computational resources in a secure and isolated environment
     with standard API access, without the overhead of managing physical servers.
@@ -16,12 +16,17 @@ service:
     computing resources based on your research needs, without disrupting your workflow.
 
     With Cloud Compute you can:
+
     - Execute compute- and data-intensive workloads (both batch and interactive)
+
     - Host long-running services (e.g. web servers, databases or applications servers)
+
     - Create disposable testing and development environments on virtual machines and
       scale your infrastructure needs
+
     - Select virtual machine configurations (CPU, memory, disk) and application environments
       to fit your requirements
+
     - Manage your Cloud Compute resources in a flexible way with integrated
       monitoring and accounting capabilities
   tagline: Run virtual machines on-demand with complete control over computing resources

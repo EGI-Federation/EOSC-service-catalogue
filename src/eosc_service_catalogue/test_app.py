@@ -7,7 +7,6 @@ from importlib.resources import files
 import yaml
 
 from . import model
-from . import main
 
 
 def test_validate_services_data():

@@ -6,12 +6,12 @@ metadata:
     {{- include "eosc-service-registry.labels" . | nindent 4 }}
   annotations:
     checkov.io/skip1: CKV_K8S_43=No need for image digest
-    checkov.io/skip2: CKV_K8S_42=No read-only fs
+    checkov.io/skip2: CKV_K8S_22=No read-only fs
     checkov.io/skip3: CKV_K8S_15=Image pull policy is set elsewhere
     checkov.io/skip4: CKV_K8S_21=Namespace is set elsewhere
     checkov.io/skip5: CKV_K8S_29=Security Context is set elsewhere
     checkov.io/skip6: CKV_K8S_40=We are already using non root
-    checkov.io/skip7: CKV_K8S_6=We are already using non root
+    checkov.io/skip7: CKV2_K8S_6=We are already using non root
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:

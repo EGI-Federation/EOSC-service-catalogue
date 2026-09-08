@@ -53,9 +53,10 @@ def keyword_filter(keyword: str | None):
         return lambda x: True
 
     def check_keyword(svc: model.EOSCServiceBundle):
-        if svc.service.tags:
-            if any(keyword.casefold() in tag.casefold() for tag in svc.service.tags):
-                return True
+        if svc.service.tags and any(
+            keyword.casefold() in tag.casefold() for tag in svc.service.tags
+        ):
+            return True
         return any(
             keyword.casefold() in (txt.casefold() if txt else "")
             for txt in (svc.service.name, svc.service.description, svc.service.tagline)

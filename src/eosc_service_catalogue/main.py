@@ -14,7 +14,7 @@ Params:
 """
 
 from importlib.resources import files
-from typing import Literal, Optional
+from typing import Literal
 
 import yaml
 from fastapi import FastAPI, HTTPException, Query
@@ -28,7 +28,7 @@ _egi_service_bundle: list[model.EOSCServiceBundle] = []
 
 
 def mystrip(desc: str) -> str:
-    return "".join(map(lambda x: x.strip() if x else "\n", desc.split("\n")))
+    return "".join(x.strip() if x else "\n" for x in desc.split("\n"))
 
 
 def load_services() -> list[model.EOSCServiceBundle]:
@@ -85,28 +85,28 @@ class ServicesResponse(BaseModel):
 
 @app.get("/services")
 def services(
-    keyword: Optional[str] = Query("", description="Keyword to refine the search"),
-    from_: Optional[int] = Query(
+    keyword: str | None = Query("", description="Keyword to refine the search"),
+    from_: int | None = Query(
         0,
         description="Starting index in the result set (default 0)",
         alias="from",
         ge=0,
     ),
-    quantity: Optional[int] = Query(
+    quantity: int | None = Query(
         -1,
         description="Quantity to be fetched, -1 gets all records (default -1)",
         ge=-1,
     ),
-    order: Optional[Literal["asc", "desc"]] = Query(
+    order: Literal["asc", "desc"] | None = Query(
         "asc", description="Order of results: 'asc' or 'desc' (default: 'asc')"
     ),
-    sort_field: Optional[str] = Query(
+    sort_field: str | None = Query(
         "", description="Field to user for ordering", alias="sort"
     ),
 ) -> ServicesResponse:
     """Get a list of Service profiles"""
 
-    if sort_field and sort_field not in model.Service.model_fields.keys():
+    if sort_field and sort_field not in model.Service.model_fields:
         raise HTTPException(
             status_code=400, detail=f"Invalid 'sort' field: {sort_field}"
         )

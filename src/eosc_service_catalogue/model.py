@@ -5,8 +5,17 @@
 from __future__ import annotations
 
 from enum import Enum
+from typing import Annotated
 
-from pydantic import AnyUrl, BaseModel, ConfigDict, EmailStr, Field, RootModel
+from pydantic import (
+    AnyUrl,
+    BaseModel,
+    ConfigDict,
+    EmailStr,
+    Field,
+    RootModel,
+    field_validator,
+)
 
 
 class LanguageCode(Enum):
@@ -245,6 +254,24 @@ class OrderType(Enum):
     order_type_open_access = "order_type-open_access"
     order_type_order_required = "order_type-order_required"
     order_type_other = "order_type-other"
+
+
+# As defined in https://docs.google.com/spreadsheets/d/11XrO7zH1zO0c9BvWaQd7eyFJFRvwrUm83t0oTAokODE/edit?gid=1823616558#gid=1823616558
+class ServiceClassification(Enum):
+    publishing_and_discovery = "Publishing & Discovery"
+    research_assessment_and_monitoring = "Research Assessment & Monitoring"
+    data_management_and_curation = "Data Management & Curation"
+    data_processing_and_analysis = "Data Processing & Analysis"
+    compute_services = "Compute Services"
+    storage_services = "Storage Services"
+    networking_services = "Networking Services"
+    science_gateways = "Science Gateways"
+    instrumentation_and_physical_resources = "Instrumentation & Physical Resources"
+    research_support_and_collaboration = "Research Support & Collaboration"
+    training_and_skills_development = "Training & Skills Development"
+    infrastructure_operations_services = "Infrastructure Operations Services"
+    persistent_identifiers = "Persistent Identifiers"
+    other = "Other"
 
 
 class CategoryId(Enum):
@@ -928,9 +955,17 @@ class ServiceCategoryEntry(BaseModel):
     subcategory: SubcategoryId | None = None
 
 
+def enum_list_value_by_name(value: Any, enum_type: Enum) -> Any:
+    if not isinstance(value, list):
+        return value
+    else:
+        return [getattr(enum_type, v, v) for v in value]
+
+
 class Service(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
+        use_enum_values=True,
     )
     id: str = Field(..., description="Service identifier (same as service bundle ID).")
     alternativeIdentifiers: list[AlternativeIdentifier] = Field(
@@ -954,6 +989,9 @@ class Service(BaseModel):
     categories: list[ServiceCategoryEntry] = Field(
         ..., description="Service categories.", min_length=1
     )
+    classification: Annotated[
+        list[ServiceClassification] | None, Field(description="Service classification.")
+    ] = None
     targetUsers: list[TargetUser] = Field(
         ..., description="Intended target users.", min_length=1
     )
@@ -980,6 +1018,11 @@ class Service(BaseModel):
     )
     accessPolicy: AnyUrl | None = Field(None, description="URL for the access policy.")
     orderType: OrderType = Field(..., description="Ordering modality for the service.")
+
+    @field_validator("classification", mode="before")
+    @classmethod
+    def validate_enum_list(cls, value: Any) -> Any:
+        return enum_list_value_by_name(value, ServiceClassification)
 
 
 class EOSCServiceBundle(BaseModel):

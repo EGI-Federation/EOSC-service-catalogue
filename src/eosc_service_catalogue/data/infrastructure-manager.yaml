@@ -24,6 +24,7 @@ service:
     - category: category-access_physical_and_eInfrastructures-compute
   classification:
     - compute_services
+    - science_gateways
   targetUsers:
     - target_user-research_communities
     - target_user-research_groups

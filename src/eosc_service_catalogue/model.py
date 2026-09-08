@@ -955,7 +955,7 @@ class ServiceCategoryEntry(BaseModel):
     subcategory: SubcategoryId | None = None
 
 
-def enum_list_value_by_name(value: Any, enum_type: Enum) -> Any:
+def enum_list_value_by_name(value: Any, enum_type: Any) -> Any:
     if not isinstance(value, list):
         return value
     else:

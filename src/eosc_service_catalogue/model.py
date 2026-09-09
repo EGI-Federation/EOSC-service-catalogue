@@ -929,6 +929,275 @@ class ScientificSubdomains(Enum):
     )
 
 
+class ResearchDomain(Enum):
+    natural_sciences = "natural sciences"
+    agricultural_sciences = "agricultural sciences"
+    medical_and_health_sciences = "medical and health sciences"
+    engineering_and_technology = "engineering and technology"
+    social_sciences = "social sciences"
+    humanities = "humanities"
+
+
+class ResearchSubDomain(Enum):
+    physical_sciences = "physical sciences"
+    earth_and_related_environmental_sciences = (
+        "earth and related environmental sciences"
+    )
+    chemical_sciences = "chemical sciences"
+    computer_and_information_sciences = "computer and information sciences"
+    biological_sciences = "biological sciences"
+    mathematics = "mathematics"
+    other_natural_sciences = "other natural sciences"
+    agriculture_forestry_and_fisheries = "agriculture, forestry, and fisheries"
+    animal_and_dairy_science = "animal and dairy science"
+    agricultural_biotechnology = "agricultural biotechnology"
+    other_agricultural_sciences = "other agricultural sciences"
+    veterinary_sciences = "veterinary sciences"
+    health_sciences = "health sciences"
+    basic_medicine = "basic medicine"
+    clinical_medicine = "clinical medicine"
+    other_medical_sciences = "other medical sciences"
+    medical_biotechnology = "medical biotechnology"
+    materials_engineering = "materials engineering"
+    civil_engineering = "civil engineering"
+    electrical_engineering_electronic_engineering_information_engineering = (
+        "electrical engineering, electronic engineering, information engineering"
+    )
+    environmental_engineering = "environmental engineering"
+    other_engineering_and_technologies = "other engineering and technologies"
+    industrial_biotechnology = "industrial biotechnology"
+    mechanical_engineering = "mechanical engineering"
+    nanotechnology = "nanotechnology"
+    chemical_engineering = "chemical engineering"
+    environmental_biotechnology = "environmental biotechnology"
+    medical_engineering = "medical engineering"
+    sociology = "sociology"
+    economics_and_business = "economics and business"
+    social_geography = "social geography"
+    law = "law"
+    political_sciences = "political sciences"
+    psychology = "psychology"
+    educational_sciences = "educational sciences"
+    other_social_sciences = "other social sciences"
+    media_and_communications = "media and communications"
+    languages_and_literature = "languages and literature"
+    history_and_archaeology = "history and archaeology"
+    arts = "arts"
+    philosophy_ethics_and_religion = "philosophy, ethics and religion"
+    other_humanities = "other humanities"
+
+
+# this may be helpful in the future, not sure how the research domains will be
+# handled by the API
+RESEARCH_DOMAINS = [
+    {
+        "id": "http://data.europa.eu/8mn/euroscivoc/3d76a7f4-5a16-411e-ae44-7b712d5222ee",
+        "name": "natural sciences",
+        "subdomains": [
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/d3b09b78-ac5c-4fc3-b58a-9573daf0e304",
+                "name": "physical sciences",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/4a8788fc-4172-461c-ae94-40be4f39043f",
+                "name": "earth and related environmental sciences",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/bce870dd-43f3-4656-8866-d76b0d71f5b8",
+                "name": "chemical sciences",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/e437ed99-4a4e-4fb3-af7e-fae6a2c2a800",
+                "name": "computer and information sciences",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/803cff73-504b-41ae-9873-1836c76c15d1",
+                "name": "biological sciences",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/5ac3ab8e-7d50-4091-94e2-0eec71c915db",
+                "name": "mathematics",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/e5178751-bb89-45c6-802b-2d2374b3ecc3",
+                "name": "other natural sciences",
+            },
+        ],
+    },
+    {
+        "id": "http://data.europa.eu/8mn/euroscivoc/9b9abbee-82f5-4766-bd4d-feb73cf06573",
+        "name": "agricultural sciences",
+        "subdomains": [
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/4df60e5a-a143-45d2-b1a6-c2dcb31d977a",
+                "name": "agriculture, forestry, and fisheries",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/b33c5338-c5bb-4026-8b86-7e2ff7cd2e3c",
+                "name": "animal and dairy science",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/1d8b779c-f72c-40fe-a8b9-22608c4e9df4",
+                "name": "agricultural biotechnology",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/fba9976f-0a7e-410c-8fce-3a6cef46f5e1",
+                "name": "other agricultural sciences",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/55e533c2-cad7-45bc-a66f-e813cda04e70",
+                "name": "veterinary sciences",
+            },
+        ],
+    },
+    {
+        "id": "http://data.europa.eu/8mn/euroscivoc/9e8e1abb-1a14-40ef-9658-782092fa5cf6",
+        "name": "medical and health sciences",
+        "subdomains": [
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/34b9c059-9e6c-4ec1-8a96-845c95c1a978",
+                "name": "health sciences",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/5c631d7c-2a8c-40b4-9ba9-71121e2d5e63",
+                "name": "basic medicine",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/a348fcd2-3bdd-46f9-aa2c-a91301f1e12e",
+                "name": "clinical medicine",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/a357cf4d-48e6-4d5d-b8bf-3e39cbbbe713",
+                "name": "other medical sciences",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/495b214f-06c8-45b9-a5d2-64e2df5dc2e3",
+                "name": "medical biotechnology",
+            },
+        ],
+    },
+    {
+        "id": "http://data.europa.eu/8mn/euroscivoc/64605fff-1946-4fd4-b021-e2e83b71dcac",
+        "name": "engineering and technology",
+        "subdomains": [
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/dc9a4100-9eb3-4956-8fd8-b67ea07a70ad",
+                "name": "materials engineering",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/26770c2b-64ce-4611-896f-cdefb4893317",
+                "name": "civil engineering",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/325a846e-9c47-4aca-9358-5c8facd2e812",
+                "name": "electrical engineering, electronic engineering, "
+                "information engineering",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/531bd18a-eedd-4345-8b2f-5464f96615f8",
+                "name": "environmental engineering",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/14e75836-6f05-46f9-9c82-ca12468b0452",
+                "name": "other engineering and technologies",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/12df4518-adab-4191-a79f-74eb18ad1688",
+                "name": "industrial biotechnology",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/ea994073-d367-4ed7-9df3-4477a9c6cf6f",
+                "name": "mechanical engineering",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/739766f0-539e-4fba-8144-9249bb38719a",
+                "name": "nanotechnology",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/10352c4c-328e-4dac-a89c-44b6be1420e9",
+                "name": "chemical engineering",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/776bf529-b4bb-458b-ad4f-50b327a822ce",
+                "name": "environmental biotechnology",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/742439ad-5d62-4e2d-bd77-0eb7caaa75f4",
+                "name": "medical engineering",
+            },
+        ],
+    },
+    {
+        "id": "http://data.europa.eu/8mn/euroscivoc/12c980a5-034f-4cd5-8ce7-fcfe109c675c",
+        "name": "social sciences",
+        "subdomains": [
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/839b7158-09d9-4799-aacc-bb07d00c1668",
+                "name": "sociology",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/052bc92d-760c-43ab-958e-2330c72a4212",
+                "name": "economics and business",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/8614801c-e2ae-4e99-93b0-cfecb09c4f35",
+                "name": "social geography",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/77030c6f-37d5-46d0-961c-b2a053ecb8d7",
+                "name": "law",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/f8714203-d97f-4852-b051-3b63b2795faa",
+                "name": "political sciences",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/5c66325e-b247-4e52-92ec-544ae4d061cc",
+                "name": "psychology",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/734e0a2e-5a5f-4bee-aff1-39389370e524",
+                "name": "educational sciences",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/0bf709d0-834b-4448-a89c-7fb04cece64a",
+                "name": "other social sciences",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/8d3657d8-563a-47fb-a5c2-5592b08365b5",
+                "name": "media and communications",
+            },
+        ],
+    },
+    {
+        "id": "http://data.europa.eu/8mn/euroscivoc/7a2dcf7b-2c20-468a-a81c-76d67c14de31",
+        "name": "humanities",
+        "subdomains": [
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/1ad04442-4f97-4a5e-aba8-4fc2889faeca",
+                "name": "languages and literature",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/de62b610-a9d3-430b-92ff-366f28f7b1c7",
+                "name": "history and archaeology",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/a55114ca-1ad7-4c52-a261-d753fbeb3529",
+                "name": "arts",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/866c484a-44d8-4fde-b54f-3b1d9f8ca612",
+                "name": "philosophy, ethics and religion",
+            },
+            {
+                "id": "http://data.europa.eu/8mn/euroscivoc/e2120c91-f57d-4f96-8992-59c109634f1c",
+                "name": "other humanities",
+            },
+        ],
+    },
+]
+
+
 class AlternativeIdentifier(BaseModel):
     model_config = ConfigDict(
         extra="forbid",

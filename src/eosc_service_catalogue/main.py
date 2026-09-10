@@ -141,5 +141,5 @@ def services(
         total=total,
         from_=start,
         to=end,
-        results=bundle[start:end],
+        results=bundle[start:end + 1],
     )

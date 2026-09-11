@@ -2,16 +2,15 @@
 Tests for main.py application
 """
 
-from fastapi.testclient import TestClient
-
+from eosc_service_catalogue import model
 from eosc_service_catalogue.main import (
     app,
-    load_services,
     keyword_filter,
-    service_sorter,
+    load_services,
     mystrip,
+    service_sorter,
 )
-from eosc_service_catalogue import model
+from fastapi.testclient import TestClient
 
 
 def test_load_services():

@@ -32,6 +32,8 @@ service:
     - scientificDomain: scientific_domain-generic
   categories:
     - category: category-access_physical_and_eInfrastructures-compute
+  classification:
+    - compute_services
   targetUsers:
     - target_user-research_communities
     - target_user-research_groups

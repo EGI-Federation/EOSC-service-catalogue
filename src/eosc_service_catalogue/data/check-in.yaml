@@ -51,6 +51,8 @@ service:
     - scientificDomain: scientific_domain-generic
   categories:
     - category: category-security_and_operations-security_and_identity
+  classification:
+    - infrastructure_operations_services
   targetUsers:
     - target_user-research_communities
     - target_user-research_groups

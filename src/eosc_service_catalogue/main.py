@@ -129,14 +129,8 @@ def services(
     start = from_ if from_ else 0
     if quantity is None:
         quantity = -1
-    if not quantity:
-        raise HTTPException(
-            status_code=400, detail=f"Invalid 'quantity' field: {quantity}"
-        )
-    if start >= total:
-        raise HTTPException(status_code=400, detail=f"Invalid 'from' value: {from_}")
     quantity = quantity if quantity != -1 else total
-    end = min(start + quantity, total - 1)
+    end = min(start + quantity, total) if start < total else start
     return ServicesResponse(
         total=total,
         from_=start,

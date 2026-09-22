@@ -25,13 +25,15 @@ service:
       (either belonging or not to the EGI infrastructure)  with community-specific
       storage/data and other integrations (e.g. specific community AAI system)
   tagline:
-    Create interactive documents with live code, visualisations and narrative text
-    powered by the Jupyter technology
+    Create interactive documents with live code, visualisations and narrative
+    text powered by the Jupyter technology
   logo: https://cdn.egi.eu/app/uploads/2022/06/egi-icon-notebooks.png
   scientificDomains:
     - scientificDomain: scientific_domain-generic
   categories:
     - category: category-processing_and_analysis-data_analysis
+  classification:
+    - data_processing_and_analysis
   targetUsers:
     - target_user-research_communities
     - target_user-research_groups

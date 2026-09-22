@@ -2,7 +2,7 @@
 id: egi-node:external:training-infrastructure
 service:
   id: egi-node:external:training-infrastructure
-  #abbreviation: 
+  #abbreviation:
   name: Training Infrastructure
   webpage: https://www.egi.eu/service/training-infrastructure/
   description: |
@@ -28,6 +28,11 @@ service:
     - scientificDomain: scientific_domain-generic
   categories:
     - category: category-access_physical_and_eInfrastructures-compute
+  classification:
+    - compute_services
+    - storage_services
+    - training_and_skills_development
+    - data_processing_and_analysis
   targetUsers:
     - target_user-research_communities
     - target_user-research_groups

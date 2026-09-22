@@ -21,12 +21,16 @@ service:
     With FitSM training, you can:
     - Increase your expertise in managing IT services
     - Raise your professional profile with a recognised certification
-  tagline: Learn how to manage IT services with a pragmatic and lightweight standard
+  tagline:
+    Learn how to manage IT services with a pragmatic and lightweight standard
   logo: https://cdn.egi.eu/app/uploads/2022/06/egi-icon-fitsm-training.png
   scientificDomains:
     - scientificDomain: scientific_domain-generic
   categories:
     - category: category-training_and_support-education_and_training
+  classification:
+    - training_and_skills_development
+    - research_support_and_collaboration
   targetUsers:
     - target_user-research_communities
     - target_user-research_groups

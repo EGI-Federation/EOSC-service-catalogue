@@ -10,7 +10,7 @@ service:
     storage location to another using different protocols (HTTP/Webdav, gsiftp, XRootD)
     The Data Transfer service has mechanisms to ensure automatic retry in case of failure and optimize transfer bandwidth.
     The service includes dedicated interfaces to display statistics of on-going transfers and manage network resources.
-    
+
     Main characteristics:
     - Ideal for very large files
     - Able to handle large amounts of files
@@ -21,6 +21,8 @@ service:
     - scientificDomain: scientific_domain-generic
   categories:
     - category: category-processing_and_analysis-data_management
+  classification:
+    - networking_services
   targetUsers:
     - target_user-research_communities
     - target_user-research_groups

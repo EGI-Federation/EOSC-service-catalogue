@@ -28,13 +28,16 @@ service:
     successfully pass the final exam at the end of the course. The certification is
     backed by certification authority ICO-Cert.
   tagline:
-    A systematic approach to managing sensitive company information so that it remains
-    secure
+    A systematic approach to managing sensitive company information so that it
+    remains secure
   logo: https://egi-api.nois3.net/app/uploads/2022/06/egi-icon-high-throughput-compute.png
   scientificDomains:
     - scientificDomain: scientific_domain-generic
   categories:
     - category: category-training_and_support-education_and_training
+  classification:
+    - training_and_skills_development
+    - research_support_and_collaboration
   targetUsers:
     - target_user-research_communities
     - target_user-research_groups

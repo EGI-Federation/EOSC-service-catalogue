@@ -40,5 +40,5 @@ service:
   trl: trl-9
   userManual: https://docs.egi.eu/users/data-transfer/
   termsOfUse: https://www.egi.eu/terms-of-use/
-  accessPolicy: https://www.egi.eu/services/research/#access-policies
+  accessPolicy: https://go.egi.eu/user-access-policy
   orderType: order_type-order_required

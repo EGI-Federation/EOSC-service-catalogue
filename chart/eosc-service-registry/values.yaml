@@ -75,10 +75,13 @@ livenessProbe:
   httpGet:
     path: /docs
     port: http
+  initialDelaySeconds: 15
+
 readinessProbe:
   httpGet:
     path: /docs
     port: http
+  initialDelaySeconds: 15
 
 nodeSelector: {}
 

@@ -2,6 +2,8 @@
 Tests for main.py application
 """
 
+from unittest.mock import patch
+
 from eosc_service_catalogue import model
 from eosc_service_catalogue.main import (
     app,
@@ -16,10 +18,11 @@ from fastapi.testclient import TestClient
 def test_load_services():
     """Test that services are loaded correctly"""
     services = load_services()
-    assert isinstance(services, list)
+    assert isinstance(services, dict)
     assert len(services) > 0
     # Check that at least one service is valid
-    sample = services[0]
+    sample_id, sample = services.popitem()
+    assert sample.id == sample_id
     assert hasattr(sample, "service")
     assert hasattr(sample.service, "id")
     assert hasattr(sample.service, "name")
@@ -243,3 +246,46 @@ def test_mystrip_function():
     result = mystrip("")
     expected = "\n"
     assert result == expected
+
+
+def test_service_endpoint_404():
+    client = TestClient(app)
+
+    response = client.get("/service/foo")
+    assert response.status_code == 404
+
+
+def test_service_fake_data():
+    client = TestClient(app)
+
+    with patch("eosc_service_catalogue.main.load_services") as m_load:
+        m_load.return_value = {
+            "test-id": model.EOSCServiceBundle(
+                id="test-id",
+                service=model.Service(
+                    id="test-id",
+                    name="A Service",
+                    webpage="https://example.com",
+                    description="Test description",
+                    tagline="Test tagline",
+                    scientificDomains=[
+                        model.ScientificDomainEntry(
+                            scientificDomain=model.ScientificDomains.scientific_domain_generic
+                        )
+                    ],
+                    categories=[
+                        model.ServiceCategoryEntry(
+                            category=model.CategoryId.category_other_other
+                        )
+                    ],
+                    targetUsers=[model.TargetUser.target_user_researchers],
+                    languageAvailabilities=[model.LanguageCode.en],
+                    trl=model.TRL.trl_1,
+                    orderType=model.OrderType.order_type_other,
+                    tags=[],
+                ),
+            ),
+        }
+        response = client.get("/service/test-id")
+        assert response.status_code == 200
+        assert response.json()["id"] == "test-id"

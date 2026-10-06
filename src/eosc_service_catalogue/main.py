@@ -14,7 +14,7 @@ Params:
 """
 
 from importlib.resources import files
-from typing import Literal, Optional
+from typing import Literal
 
 import yaml
 from fastapi import FastAPI, HTTPException, Query
@@ -24,14 +24,14 @@ from . import model
 
 app = FastAPI()
 
-_egi_service_bundle: list[model.EOSCServiceBundle] = []
+_egi_service_bundle: dict[str, model.EOSCServiceBundle] = {}
 
 
 def mystrip(desc: str) -> str:
-    return "".join(map(lambda x: x.strip() if x else "\n", desc.split("\n")))
+    return "".join([x.strip() if x else "\n" for x in desc.split("\n")])
 
 
-def load_services() -> list[model.EOSCServiceBundle]:
+def load_services() -> dict[str, model.EOSCServiceBundle]:
     """Loads the services from the data files"""
     global _egi_service_bundle
     if not _egi_service_bundle:
@@ -39,9 +39,10 @@ def load_services() -> list[model.EOSCServiceBundle]:
             if not svc_file.name.endswith(".yaml"):
                 continue
             try:
-                svc = yaml.load(svc_file.read_text(), Loader=yaml.SafeLoader)
+                svc_yaml = yaml.load(svc_file.read_text(), Loader=yaml.SafeLoader)
                 # we do a bit of magic here with the description to avoid weird formatting
-                _egi_service_bundle.append(model.EOSCServiceBundle.model_validate(svc))
+                svc = model.EOSCServiceBundle.model_validate(svc_yaml)
+                _egi_service_bundle[svc.id] = svc
             except Exception as e:
                 print(e)
                 continue
@@ -53,9 +54,10 @@ def keyword_filter(keyword: str | None):
         return lambda x: True
 
     def check_keyword(svc: model.EOSCServiceBundle):
-        if svc.service.tags:
-            if any(keyword.casefold() in tag.casefold() for tag in svc.service.tags):
-                return True
+        if svc.service.tags and any(
+            keyword.casefold() in tag.casefold() for tag in svc.service.tags
+        ):
+            return True
         return any(
             keyword.casefold() in (txt.casefold() if txt else "")
             for txt in (svc.service.name, svc.service.description, svc.service.tagline)
@@ -85,28 +87,28 @@ class ServicesResponse(BaseModel):
 
 @app.get("/services")
 def services(
-    keyword: Optional[str] = Query("", description="Keyword to refine the search"),
-    from_: Optional[int] = Query(
+    keyword: str | None = Query("", description="Keyword to refine the search"),
+    from_: int | None = Query(
         0,
         description="Starting index in the result set (default 0)",
         alias="from",
         ge=0,
     ),
-    quantity: Optional[int] = Query(
+    quantity: int | None = Query(
         -1,
         description="Quantity to be fetched, -1 gets all records (default -1)",
         ge=-1,
     ),
-    order: Optional[Literal["asc", "desc"]] = Query(
+    order: Literal["asc", "desc"] | None = Query(
         "asc", description="Order of results: 'asc' or 'desc' (default: 'asc')"
     ),
-    sort_field: Optional[str] = Query(
+    sort_field: str | None = Query(
         "", description="Field to user for ordering", alias="sort"
     ),
 ) -> ServicesResponse:
     """Get a list of Service profiles"""
 
-    if sort_field and sort_field not in model.Service.model_fields.keys():
+    if sort_field and sort_field not in model.Service.model_fields:
         raise HTTPException(
             status_code=400, detail=f"Invalid 'sort' field: {sort_field}"
         )
@@ -114,7 +116,7 @@ def services(
     # keyword filter
     # sort and filter by keyword
     bundle = sorted(
-        filter(keyword_filter(keyword), load_services()),
+        filter(keyword_filter(keyword), list(load_services().values())),
         key=service_sorter(sort_field),
         reverse=(order == "desc"),
     )
@@ -137,3 +139,12 @@ def services(
         to=end,
         results=bundle[start:end],
     )
+
+
+@app.get("/service/{service_id}")
+def service(service_id: str) -> model.EOSCServiceBundle:
+    """Get a single service"""
+    svc = load_services().get(service_id, None)
+    if not svc:
+        raise HTTPException(status_code=404, detail=f"Service {service_id} not found")
+    return svc

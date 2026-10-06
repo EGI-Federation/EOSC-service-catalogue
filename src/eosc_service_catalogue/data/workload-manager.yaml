@@ -19,7 +19,7 @@ service:
     - Supports both cloud and grid capacities
     - User-friendly interface and open architecture
   tagline: Manage computing workloads in an efficient way
-  logo: https://egi-api.nois3.net/app/uploads/2022/06/egi-icon-high-throughput-compute.png
+  logo: https://cdn.egi.eu/app/uploads/2022/06/egi-icon-workload-manager.png
   scientificDomains:
     - scientificDomain: scientific_domain-generic
   categories:

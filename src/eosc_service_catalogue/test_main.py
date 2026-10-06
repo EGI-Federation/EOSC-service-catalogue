@@ -2,6 +2,8 @@
 Tests for main.py application
 """
 
+from unittest.mock import patch
+
 from eosc_service_catalogue import model
 from eosc_service_catalogue.main import (
     app,
@@ -244,3 +246,46 @@ def test_mystrip_function():
     result = mystrip("")
     expected = "\n"
     assert result == expected
+
+
+def test_service_endpoint_404():
+    client = TestClient(app)
+
+    response = client.get("/service/foo")
+    assert response.status_code == 404
+
+
+def test_service_fake_data():
+    client = TestClient(app)
+
+    with mock.patch(app.load_services) as m_load:
+        m_load.return_values = {
+            "test-id",
+            model.EOSCServiceBundle(
+                id="test-id",
+                service=model.Service(
+                    id="test-id",
+                    name="A Service",
+                    webpage="https://example.com",
+                    description="Test description",
+                    tagline="Test tagline",
+                    scientificDomains=[
+                        model.ScientificDomainEntry(
+                            scientificDomain=model.ScientificDomains.scientific_domain_generic
+                        )
+                    ],
+                    categories=[
+                        model.ServiceCategoryEntry(
+                            category=model.CategoryId.category_other_other
+                        )
+                    ],
+                    targetUsers=[model.TargetUser.target_user_researchers],
+                    languageAvailabilities=[model.LanguageCode.en],
+                    trl=model.TRL.trl_1,
+                    orderType=model.OrderType.order_type_other,
+                    tags=[],
+                ),
+            ),
+        }
+        response = client.get("/service/test-id")
+        assert response.status_code == 200

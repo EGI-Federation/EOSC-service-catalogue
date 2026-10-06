@@ -934,7 +934,7 @@ class Service(BaseModel):
     )
     id: str = Field(..., description="Service identifier (same as service bundle ID).")
     alternativeIdentifiers: list[AlternativeIdentifier] = Field(
-        None, description="Alternative identifiers for the service.", min_length=0
+        [] , description="Alternative identifiers for the service.", min_length=0
     )
     abbreviation: str | None = Field(
         None, description="Abbreviation of the service name.", min_length=1

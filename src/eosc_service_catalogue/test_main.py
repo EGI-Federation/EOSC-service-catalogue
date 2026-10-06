@@ -4,8 +4,6 @@ Tests for main.py application
 
 from unittest.mock import patch
 
-from fastapi.testclient import TestClient
-
 from eosc_service_catalogue import model
 from eosc_service_catalogue.main import (
     app,
@@ -14,6 +12,7 @@ from eosc_service_catalogue.main import (
     mystrip,
     service_sorter,
 )
+from fastapi.testclient import TestClient
 
 
 def test_load_services():

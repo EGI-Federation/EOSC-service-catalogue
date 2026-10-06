@@ -24,7 +24,7 @@ from . import model
 
 app = FastAPI()
 
-_egi_service_bundle: list[model.EOSCServiceBundle] = []
+_egi_service_bundle: dict[str, model.EOSCServiceBundle] = {}
 
 
 def mystrip(desc: str) -> str:
@@ -39,9 +39,10 @@ def load_services() -> list[model.EOSCServiceBundle]:
             if not svc_file.name.endswith(".yaml"):
                 continue
             try:
-                svc = yaml.load(svc_file.read_text(), Loader=yaml.SafeLoader)
+                svc_yaml = yaml.load(svc_file.read_text(), Loader=yaml.SafeLoader)
                 # we do a bit of magic here with the description to avoid weird formatting
-                _egi_service_bundle.append(model.EOSCServiceBundle.model_validate(svc))
+                svc = model.EOSCServiceBundle.model_validate(svc_yaml)
+                _egi_service_bundle[svc.id] = svc
             except Exception as e:
                 print(e)
                 continue
@@ -114,7 +115,7 @@ def services(
     # keyword filter
     # sort and filter by keyword
     bundle = sorted(
-        filter(keyword_filter(keyword), load_services()),
+        filter(keyword_filter(keyword), list(load_services().values())),
         key=service_sorter(sort_field),
         reverse=(order == "desc"),
     )
@@ -137,3 +138,12 @@ def services(
         to=end,
         results=bundle[start:end],
     )
+
+
+@app.get("/service/{service_id}")
+def service(service_id: str) -> model.EOSCServiceBundle:
+    """Get a single service"""
+    svc = load_services().get(service_id, None)
+    if not svc:
+        raise HTTPException(status_code=404, detail=f"Service {service_id} not found")
+    return svc

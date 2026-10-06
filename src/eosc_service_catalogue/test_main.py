@@ -16,10 +16,11 @@ from fastapi.testclient import TestClient
 def test_load_services():
     """Test that services are loaded correctly"""
     services = load_services()
-    assert isinstance(services, list)
+    assert isinstance(services, dict)
     assert len(services) > 0
     # Check that at least one service is valid
-    sample = services[0]
+    sample_id, sample = services.popitem()
+    assert sample.id == sample_id
     assert hasattr(sample, "service")
     assert hasattr(sample.service, "id")
     assert hasattr(sample.service, "name")

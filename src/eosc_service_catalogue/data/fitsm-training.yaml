@@ -4,7 +4,7 @@ service:
   id: egi-node:external:fitsm-training
   abbreviation: FitSM
   name: FitSM Training
-  webpage: https://www.egi.eu/services/fitsm-training/
+  webpage: https://www.egi.eu/service/fitsm-training/
   description: |
     With FitSM Training, you will learn the fundamentals of IT service management and
     how to implement FitSM in your organisation through a combination of lessons and

@@ -258,10 +258,9 @@ def test_service_endpoint_404():
 def test_service_fake_data():
     client = TestClient(app)
 
-    with mock.patch(app.load_services) as m_load:
-        m_load.return_values = {
-            "test-id",
-            model.EOSCServiceBundle(
+    with patch("eosc_service_catalogue.main.load_services") as m_load:
+        m_load.return_value = {
+            "test-id": model.EOSCServiceBundle(
                 id="test-id",
                 service=model.Service(
                     id="test-id",

@@ -31,7 +31,7 @@ def mystrip(desc: str) -> str:
     return "".join(map(lambda x: x.strip() if x else "\n", desc.split("\n")))
 
 
-def load_services() -> list[model.EOSCServiceBundle]:
+def load_services() -> dict[str, model.EOSCServiceBundle]:
     """Loads the services from the data files"""
     global _egi_service_bundle
     if not _egi_service_bundle:

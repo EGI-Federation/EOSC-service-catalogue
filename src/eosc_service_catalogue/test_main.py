@@ -289,3 +289,4 @@ def test_service_fake_data():
         }
         response = client.get("/service/test-id")
         assert response.status_code == 200
+        assert response.json()["id"] == "test-id"

@@ -30,7 +30,7 @@ service:
   tagline:
     A systematic approach to managing sensitive company information so that it remains
     secure
-  logo: https://egi-api.nois3.net/app/uploads/2022/06/egi-icon-high-throughput-compute.png
+  logo: https://cdn.egi.eu/app/uploads/2022/06/egi-icon-iso-27001-training.png
   scientificDomains:
     - scientificDomain: scientific_domain-generic
   categories:

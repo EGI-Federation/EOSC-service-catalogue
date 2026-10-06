@@ -77,7 +77,6 @@ livenessProbe:
     port: http
   initialDelaySeconds: 25
   periodSeconds: 20
-  successThreshold: 5
   timeoutSeconds: 1
 
 readinessProbe:
@@ -86,7 +85,6 @@ readinessProbe:
     port: http
   initialDelaySeconds: 25
   periodSeconds: 20
-  successThreshold: 5
   timeoutSeconds: 1
 
 nodeSelector: {}

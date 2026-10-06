@@ -28,7 +28,7 @@ _egi_service_bundle: dict[str, model.EOSCServiceBundle] = {}
 
 
 def mystrip(desc: str) -> str:
-    return "".join([x.strip if x else "\n" for x in desc.split("\n")])
+    return "".join([x.strip() if x else "\n" for x in desc.split("\n")])
 
 
 def load_services() -> dict[str, model.EOSCServiceBundle]:

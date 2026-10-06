@@ -4,7 +4,7 @@ service:
   id: egi-node:external:notebooks
   abbreviation: Notebooks
   name: Notebooks
-  webpage: https://www.egi.eu/services/notebooks/
+  webpage: https://www.egi.eu/service/notebooks/
   description: |
     The service provides a browser-based tool for interactive analysis of data using
     EGI storage and compute infrastructures based on the JupyterHub technology. The

@@ -4,7 +4,7 @@ service:
   id: egi-node:external:check-in
   abbreviation: Check-in
   name: Check-in
-  webpage: https://www.egi.eu/services/check-in/
+  webpage: https://www.egi.eu/service/check-in/
   description: |
     EGI Check-in is a comprehensive federated Identity and Access Management (IAM)
     solution, developed in alignment with the AARC Blueprint Architecture (AARC-BPA).

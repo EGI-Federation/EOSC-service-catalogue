@@ -4,7 +4,7 @@ service:
   id: egi-node:external:online-storage
   abbreviation: Online Storage
   name: Online Storage
-  webpage: https://www.egi.eu/services/online-storage/
+  webpage: https://www.egi.eu/service/online-storage/
   description: |
     The Online Storage service offers different options for data storage: 
     - Object storage:  manages data as objects and allows relatively inexpensive, 

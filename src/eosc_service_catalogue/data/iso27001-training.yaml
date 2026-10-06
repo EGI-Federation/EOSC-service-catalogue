@@ -4,7 +4,7 @@ service:
   id: egi-node:external:iso-27001-training
   abbreviation: ISO 27001 Training
   name: ISO 27001 Training
-  webpage: https://www.egi.eu/services/iso-27001-training/
+  webpage: https://www.egi.eu/service/iso-27001-training/
   description: |
     ISO/IEC 27000 family - Information security management systems
 

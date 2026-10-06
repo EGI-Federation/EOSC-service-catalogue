@@ -4,7 +4,7 @@ service:
   id: egi-node:external:replay
   abbreviation: Replay
   name: Replay
-  webpage: https://www.egi.eu/services/replay/
+  webpage: https://www.egi.eu/service/replay/
   description:
     Replay allows reproducing and sharing custom computing environments for replicating
     the execution of analysis in a notebooks-based platform. Based on the Binder

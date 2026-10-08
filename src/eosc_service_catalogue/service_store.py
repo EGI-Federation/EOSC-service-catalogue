@@ -71,7 +71,7 @@ class ServiceStore:
         return self.bundle
 
     def filtered_services(
-        self, keyword: str, sort_field: str, reverse: bool = False
+        self, keyword: str | None, sort_field: str | None, reverse: bool = False
     ) -> list:
         """Returns the service bundle list filtered by keyword and sorted by a given field"""
         return sorted(

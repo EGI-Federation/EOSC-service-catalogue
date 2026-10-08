@@ -7,7 +7,6 @@ from unittest.mock import patch
 from fastapi.testclient import TestClient
 
 from ..main import app
-
 from ..service_store import ServiceStore
 
 
@@ -60,10 +59,12 @@ def prefixed_services_endpoint_test(prefix):
     data = response.json()
     assert len(data["results"]) == data["total"]
 
+
 def test_services_endpoints():
     prefixed_services_endpoint_test("")
     prefixed_services_endpoint_test("/v1")
     prefixed_services_endpoint_test("/v2")
+
 
 def prefixed_services_endpoint_no_results_test(prefix):
     """Test the /services endpoint with various parameters"""
@@ -77,6 +78,7 @@ def prefixed_services_endpoint_no_results_test(prefix):
     assert data["from"] == 0
     assert data["to"] == 0
     assert data["results"] == []
+
 
 def test_services_endpoint_no_results():
     prefixed_services_endpoint_no_results_test("")
@@ -143,4 +145,3 @@ def test_get_service_data(bundle, bundle_v1):
     prefixed_get_service_data("", bundle_v1)
     prefixed_get_service_data("v1", bundle_v1)
     prefixed_get_service_data("v2", bundle)
-

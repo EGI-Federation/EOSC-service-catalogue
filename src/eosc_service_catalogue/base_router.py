@@ -20,7 +20,6 @@ We add an additional getter for a single service
 from typing import Literal
 
 from fastapi import APIRouter, HTTPException, Query
-from pydantic import BaseModel, Field
 
 from . import service_store
 
@@ -28,9 +27,9 @@ from . import service_store
 def create_router(model_module: type, version: str) -> APIRouter:
     """Create a router instance with specific model class"""
     # we are assuming these names are stable
-    model_class = getattr(model_module, "ServiceBundle")
-    svc_class= getattr(model_module, "Service")
-    model_response = getattr(model_module, "PagingServiceBundle")
+    model_class = model_module.ServiceBundle
+    svc_class = model_module.Service
+    model_response = model_module.PagingServiceBundle
     router = APIRouter()
     svc_store = service_store.ServiceStore(model_class, version)
 

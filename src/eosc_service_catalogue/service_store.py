@@ -1,11 +1,12 @@
 """The Service Store keeps the service data ready for the API"""
 
-from importlib.resources import files
 import re
+from importlib.resources import files
 
 import yaml
 
 VERSION_SUFFIX_RE = r"(.*)__(.*)$"
+
 
 def _keyword_filter(keyword: str | None):
     if not keyword:
@@ -38,7 +39,7 @@ class ServiceStore:
     def __init__(self, service_class: type, version: str = "v1"):
         self.bundle = {}
         self.service_class = service_class
-        self.version= version
+        self.version = version
 
     def load_services(self) -> dict:
         """Loads the services from the data files"""
@@ -53,7 +54,7 @@ class ServiceStore:
                     service = svc_yaml.get("service", {})
                     updated_fields = {}
                     fields_to_remove = []
-                    for field in service: 
+                    for field in service:
                         m = re.match(VERSION_SUFFIX_RE, field)
                         if m:
                             if m.groups()[1] == self.version:

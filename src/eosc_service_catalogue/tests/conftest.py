@@ -1,8 +1,8 @@
-
 import pytest
 
 from ..eosc_service_catalogues_specs import catalogue_model_v1
 from ..eosc_service_catalogues_specs import catalogue_model_v2 as model
+
 
 @pytest.fixture
 def mock_service():
@@ -19,11 +19,7 @@ def mock_service():
                     scientificDomain=model.ScientificDomain.generic
                 )
             ],
-            categories=[
-                model.ServiceCategory(
-                    category=model.Category.other
-                )
-            ],
+            categories=[model.ServiceCategory(category=model.Category.other)],
             targetUsers=[model.TargetUser.researchers],
             languageAvailabilities=["en"],
             trl=model.TRL.trl_1,
@@ -48,11 +44,7 @@ def mock_service_2():
                     scientificDomain=model.ScientificDomain.generic
                 )
             ],
-            categories=[
-                model.ServiceCategory(
-                    category=model.Category.other
-                )
-            ],
+            categories=[model.ServiceCategory(category=model.Category.other)],
             targetUsers=[model.TargetUser.researchers],
             languageAvailabilities=["en"],
             trl=model.TRL.trl_1,
@@ -64,10 +56,8 @@ def mock_service_2():
 
 @pytest.fixture
 def bundle(mock_service, mock_service_2):
-    return {
-        mock_service.id: mock_service,
-        mock_service_2.id: mock_service_2
-    }
+    return {mock_service.id: mock_service, mock_service_2.id: mock_service_2}
+
 
 @pytest.fixture
 def mock_service_v1():
@@ -115,7 +105,7 @@ def mock_service_2_v2():
             ],
             categories=[
                 catalogue_model_v1.ServiceCategory(
-                    category=catalogue_model_v1.Category.processing_and_analysis_data_analysis 
+                    category=catalogue_model_v1.Category.processing_and_analysis_data_analysis
                 )
             ],
             targetUsers=[catalogue_model_v1.TargetUser.resource_managers],
@@ -126,10 +116,10 @@ def mock_service_2_v2():
         ),
     )
 
+
 @pytest.fixture
 def bundle_v1(mock_service_v1, mock_service_2_v2):
     return {
         mock_service_v1.id: mock_service_v1,
-        mock_service_2_v2.id: mock_service_2_v2
+        mock_service_2_v2.id: mock_service_2_v2,
     }
-

@@ -24,8 +24,10 @@ service:
   logo: https://cdn.egi.eu/app/uploads/2023/01/software-distribution.png
   scientificDomains:
     - scientificDomain: scientific_domain-generic
-  categories:
+  categories__v1:
     - category: category-access_physical_and_eInfrastructures-compute
+  categories__v2:
+    - category: service_classification-storage_services 
   targetUsers:
     - target_user-research_communities
     - target_user-research_groups

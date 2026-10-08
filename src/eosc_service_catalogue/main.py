@@ -1,150 +1,17 @@
 """
 A trivial implementation of the EOSC Service Catalogue for a EGI Node
-
-Follows specification at https://zenodo.org/records/18622838
-
-The API of the service catalogue must implement one method
-/services //Get a list of Service profiles based on a set of filters.
-Params:
-- keyword: String (Keyword to refine the search) [optional]
-- from: String (Starting index in the result set, default 0) [optional]
-- quantity: String (Quantity to be fetched, default 10) [optional]
-- order: String (Order of results - asc/desc, default asc) [optional]
-- sort: String (Field to use for ordering) [optional
 """
 
-from importlib.resources import files
-from typing import Literal
+from fastapi import FastAPI
 
-import yaml
-from fastapi import FastAPI, HTTPException, Query
-from pydantic import BaseModel, Field
+from .eosc_service_catalogues_specs import catalogue_model_v1, catalogue_model_v2 
+from .base_router import create_router
 
-from . import model
+# Create router with v1 model
+v1_router = create_router(catalogue_model_v1, "v1")
+v2_router = create_router(catalogue_model_v2, "v2")
 
 app = FastAPI()
-
-_egi_service_bundle: dict[str, model.EOSCServiceBundle] = {}
-
-
-def mystrip(desc: str) -> str:
-    return "".join([x.strip() if x else "\n" for x in desc.split("\n")])
-
-
-def load_services() -> dict[str, model.EOSCServiceBundle]:
-    """Loads the services from the data files"""
-    global _egi_service_bundle
-    if not _egi_service_bundle:
-        for svc_file in files("eosc_service_catalogue.data").iterdir():
-            if not svc_file.name.endswith(".yaml"):
-                continue
-            try:
-                svc_yaml = yaml.load(svc_file.read_text(), Loader=yaml.SafeLoader)
-                # we do a bit of magic here with the description to avoid weird formatting
-                svc = model.EOSCServiceBundle.model_validate(svc_yaml)
-                _egi_service_bundle[svc.id] = svc
-            except Exception as e:
-                print(e)
-                continue
-    return _egi_service_bundle
-
-
-def keyword_filter(keyword: str | None):
-    if not keyword:
-        return lambda x: True
-
-    def check_keyword(svc: model.EOSCServiceBundle):
-        if svc.service.tags and any(
-            keyword.casefold() in tag.casefold() for tag in svc.service.tags
-        ):
-            return True
-        return any(
-            keyword.casefold() in (txt.casefold() if txt else "")
-            for txt in (svc.service.name, svc.service.description, svc.service.tagline)
-        )
-
-    return check_keyword
-
-
-def service_sorter(sort_field: str | None = ""):
-    if not sort_field:
-        sort_field = "id"
-
-    def get_field(svc: model.EOSCServiceBundle):
-        return getattr(svc.service, sort_field)
-
-    return get_field
-
-
-class ServicesResponse(BaseModel):
-    total: int = Field(description="Total number of services")
-    from_: int = Field(
-        serialization_alias="from", description="Index of the first service returned"
-    )
-    to: int = Field(description="Index of the last service returned")
-    results: list[model.EOSCServiceBundle] = Field(description="Results")
-
-
-@app.get("/services")
-def services(
-    keyword: str | None = Query("", description="Keyword to refine the search"),
-    from_: int | None = Query(
-        0,
-        description="Starting index in the result set (default 0)",
-        alias="from",
-        ge=0,
-    ),
-    quantity: int | None = Query(
-        -1,
-        description="Quantity to be fetched, -1 gets all records (default -1)",
-        ge=-1,
-    ),
-    order: Literal["asc", "desc"] | None = Query(
-        "asc", description="Order of results: 'asc' or 'desc' (default: 'asc')"
-    ),
-    sort_field: str | None = Query(
-        "", description="Field to user for ordering", alias="sort"
-    ),
-) -> ServicesResponse:
-    """Get a list of Service profiles"""
-
-    if sort_field and sort_field not in model.Service.model_fields:
-        raise HTTPException(
-            status_code=400, detail=f"Invalid 'sort' field: {sort_field}"
-        )
-
-    # keyword filter
-    # sort and filter by keyword
-    bundle = sorted(
-        filter(keyword_filter(keyword), list(load_services().values())),
-        key=service_sorter(sort_field),
-        reverse=(order == "desc"),
-    )
-    total = len(bundle)
-    if not total:
-        return ServicesResponse(
-            total=0,
-            from_=0,
-            to=0,
-            results=[],
-        )
-    start = from_ if from_ else 0
-    if quantity is None:
-        quantity = -1
-    quantity = quantity if quantity != -1 else total
-    end = min(start + quantity, total) if start < total else start
-    return ServicesResponse(
-        total=total,
-        from_=start,
-        to=end,
-        results=bundle[start:end],
-    )
-
-
-@app.get("/service/{service_id}")
-def service(service_id: str) -> model.EOSCServiceBundle:
-    """Get a single service"""
-    svc = load_services().get(service_id, None)
-    if not svc:
-        raise HTTPException(status_code=404, detail=f"Service {service_id} not found")
-    return svc
+app.include_router(v1_router)
+app.include_router(v1_router, prefix="/v1")
+app.include_router(v2_router, prefix="/v2")

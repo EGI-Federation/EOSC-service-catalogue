@@ -51,7 +51,7 @@ jobs:
           # Fail on errors
           DISABLE_ERRORS: false
           # Do not try to lint code from EEN
-          FILTER_REGEX_EXCLUDE: "^src/eosc_service_catalogue/eosc_service_catalogues_specs/"
+          FILTER_REGEX_EXCLUDE: ".*/eosc_service_catalogues_specs/.*"
 
       - name: Link Checker
         id: lychee

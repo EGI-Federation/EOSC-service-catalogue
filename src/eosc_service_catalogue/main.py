@@ -5,8 +5,7 @@ A trivial implementation of the EOSC Service Catalogue for a EGI Node
 from fastapi import FastAPI
 
 from .base_router import create_router
-from .eosc_service_catalogues_specs import catalogue_model_v1
-from .eosc_service_catalogues_specs import catalogue_model_v2
+from .eosc_service_catalogues_specs import catalogue_model_v1, catalogue_model_v2
 
 # Create router with v1 model
 v1_router = create_router(

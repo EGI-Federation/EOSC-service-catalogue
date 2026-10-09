@@ -22,8 +22,11 @@ service:
   logo: https://cdn.egi.eu/app/uploads/2022/06/egi-icon-workload-manager.png
   scientificDomains:
     - scientificDomain: scientific_domain-generic
-  categories:
+  categories__v1:
     - category: category-access_physical_and_eInfrastructures-compute
+  categories__v2:
+    - category: service_classification-compute_services
+    - category: service_classification-data_processing_analysis
   targetUsers:
     - target_user-research_communities
     - target_user-research_groups

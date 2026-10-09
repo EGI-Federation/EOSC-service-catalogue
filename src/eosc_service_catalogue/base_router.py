@@ -35,7 +35,7 @@ def create_router(
     router = APIRouter()
     svc_store = service_store.ServiceStore(model_bundle, version)
 
-    @router.get("/services")
+    @router.get("/services", response_model=model_response)
     def services(
         keyword: str | None = Query("", description="Keyword to refine the search"),
         from_: int | None = Query(
@@ -55,7 +55,7 @@ def create_router(
         sort_field: str | None = Query(
             "", description="Field to user for ordering", alias="sort"
         ),
-    ) -> model_response:
+    ):
         """Get a list of Service profiles"""
 
         service_fields = svc_class.model_fields
@@ -87,8 +87,8 @@ def create_router(
             results=bundle[start:end],
         )
 
-    @router.get("/service/{service_id}")
-    def service(service_id: str) -> model_bundle:
+    @router.get("/service/{service_id}", response_model=model_bundle)
+    def service(service_id: str):
         """Get a single service"""
         svc = svc_store.get_service(service_id)
         if not svc:

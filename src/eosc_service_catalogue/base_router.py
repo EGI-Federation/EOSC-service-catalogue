@@ -17,21 +17,23 @@ We add an additional getter for a single service
 /service/{service_id} // Get a service by its id
 """
 
-from typing import Literal
+from typing import Literal, Type
 
 from fastapi import APIRouter, HTTPException, Query
+from pydantic import BaseModel
 
 from . import service_store
 
 
-def create_router(model_module: type, version: str) -> APIRouter:
+def create_router(
+    version: str,
+    model_response: Type[BaseModel],
+    model_bundle: Type[BaseModel],
+    svc_class: Type[BaseModel],
+) -> APIRouter:
     """Create a router instance with specific model class"""
-    # we are assuming these names are stable
-    model_class = model_module.ServiceBundle
-    svc_class = model_module.Service
-    model_response = model_module.PagingServiceBundle
     router = APIRouter()
-    svc_store = service_store.ServiceStore(model_class, version)
+    svc_store = service_store.ServiceStore(model_bundle, version)
 
     @router.get("/services")
     def services(
@@ -86,7 +88,7 @@ def create_router(model_module: type, version: str) -> APIRouter:
         )
 
     @router.get("/service/{service_id}")
-    def service(service_id: str) -> model_class:
+    def service(service_id: str) -> model_bundle:
         """Get a single service"""
         svc = svc_store.get_service(service_id)
         if not svc:

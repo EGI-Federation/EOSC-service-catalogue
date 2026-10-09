@@ -4,6 +4,7 @@ import re
 from importlib.resources import files
 
 import yaml
+from pydantic import BaseModel
 
 VERSION_SUFFIX_RE = r"(.*)__(.*)$"
 
@@ -36,8 +37,8 @@ def _service_sorter(sort_field: str | None = ""):
 
 
 class ServiceStore:
-    def __init__(self, service_class: type, version: str = "v1"):
-        self.bundle = {}
+    def __init__(self, service_class: type[BaseModel], version: str = "v1"):
+        self.bundle: dict[str, object] = {}
         self.service_class = service_class
         self.version = version
 
@@ -64,7 +65,7 @@ class ServiceStore:
                     for field in fields_to_remove:
                         service.pop(field)
                     svc = self.service_class.model_validate(svc_yaml)
-                    self.bundle[svc.id] = svc
+                    self.bundle[svc_yaml.get("id")] = svc
                 except Exception as e:
                     print(f"Error processing {svc_file}: {e}")
                     continue

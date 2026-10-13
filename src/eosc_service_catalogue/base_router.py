@@ -17,12 +17,36 @@ We add an additional getter for a single service
 /service/{service_id} // Get a service by its id
 """
 
-from typing import Literal, Optional, get_args, get_origin
+from typing import Literal, Optional, Union, get_args, get_origin
 
 from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel
 
 from . import service_store
+
+
+def _sortable_fields(svc_class: type[BaseModel]):
+    """Dynamically determine allowed scalar fields for sorting from the service model"""
+    allowed_fields = set()
+
+    for field_name, field_info in svc_class.model_fields.items():
+        field_type = field_info.annotation
+        if field_type is not None:
+            # Handle different types of field annotations
+            origin = get_origin(field_type)
+
+            # If type has no origin or is a basic scalar type
+            if origin is None:
+                if field_type in (str, int, float, bool):
+                    allowed_fields.add(field_name)
+            # Handle Optional[type] and Union[type] - check the inner type
+            elif origin in [Optional, Union]:
+                for arg in get_args(field_type):
+                    if arg is not type(None):  # Skip None type
+                        if arg in (str, int, float, bool):
+                            allowed_fields.add(field_name)
+                        break  # Only consider first non-None argument
+    return allowed_fields
 
 
 def create_router(
@@ -34,28 +58,7 @@ def create_router(
     """Create a router instance with specific model class"""
     router = APIRouter()
     svc_store = service_store.ServiceStore(bundle_class, version)
-
-    # Dynamically determine allowed scalar fields for sorting from the service model
-    allowed_sort_fields = set()
-
-    for field_name, field_info in svc_class.model_fields.items():
-        field_type = field_info.annotation
-        if field_type is not None:
-            # Handle different types of field annotations
-            origin = get_origin(field_type)
-
-            # If type has no origin or is a basic scalar type
-            if origin is None:
-                if field_type in (str, int, float, bool):
-                    allowed_sort_fields.add(field_name)
-            # Handle Optional[type] - check the inner type
-            elif origin == Optional:
-                args = get_args(field_type)
-                for arg in args:
-                    if arg is not type(None):  # Skip None type
-                        if arg in (str, int, float, bool):
-                            allowed_sort_fields.add(field_name)
-                        break  # Only consider first non-None argument
+    allowed_sort_fields = _sortable_fields(svc_class)
 
     @router.get("/services", response_model=response_class)
     def services(

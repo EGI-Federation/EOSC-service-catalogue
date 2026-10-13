@@ -1,5 +1,6 @@
 """The Service Store keeps the service data ready for the API"""
 
+import logging
 import re
 from importlib.resources import files
 
@@ -7,6 +8,8 @@ import yaml
 from pydantic import BaseModel
 
 VERSION_SUFFIX_RE = r"(.*)__(.*)$"
+
+logger = logging.getLogger(__name__)
 
 
 def _keyword_filter(keyword: str | None):
@@ -48,6 +51,7 @@ class ServiceStore:
             for svc_file in files("eosc_service_catalogue.data").iterdir():
                 if not svc_file.name.endswith(".yaml"):
                     continue
+                logger.info(f"Loading service file {svc_file}")
                 try:
                     svc_yaml = yaml.load(svc_file.read_text(), Loader=yaml.SafeLoader)
                     # handle different versions of the data, we need to be aware of the
@@ -66,8 +70,12 @@ class ServiceStore:
                         service.pop(field)
                     svc = self.bundle_class.model_validate(svc_yaml)
                     self.bundle[svc_yaml.get("id")] = svc
-                except Exception as e:
-                    print(f"Error processing {svc_file}: {e}")
+                except (AttributeError, OSError, ValueError, yaml.YAMLError) as e:
+                    # AttributeError if the file is empty
+                    # OSError if there is any issue reading the file
+                    # ValueError if the validation is incorrect
+                    # YAMLError if there is a yaml syntax issue
+                    logger.warning(f"Ignoring error processing {svc_file}: {e}")
                     continue
         return self.bundle
 

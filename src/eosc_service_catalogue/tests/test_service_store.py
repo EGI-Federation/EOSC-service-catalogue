@@ -3,10 +3,60 @@ Tests to validate service store
 """
 
 from importlib.resources import files
+from unittest.mock import Mock, patch
+
+from pydantic import BaseModel
 
 from .. import service_store
 from ..eosc_service_catalogues_specs import catalogue_model_v1
 from ..eosc_service_catalogues_specs import catalogue_model_v2 as model
+
+
+class MockFile:
+    def __init__(self, name="", text=""):
+        self.name = name
+        self.text = text
+
+    def read_text(self):
+        return self.text
+
+
+class MockService(BaseModel):
+    id: str
+    versioned_field: str
+    other_field: str
+
+
+class MockServiceBundle(BaseModel):
+    id: str
+    service: MockService
+
+
+def test_load_services_versioned(mock_bundle_yaml):
+    ss = service_store.ServiceStore(MockServiceBundle, "foo")
+    with patch("eosc_service_catalogue.service_store.files") as m_files:
+        iterdir = Mock()
+        m_files.return_value = iterdir
+        iterdir.iterdir.return_value = [MockFile("test.yaml", mock_bundle_yaml)]
+        bundle = ss.load_services()
+        assert bundle["fake"].service.versioned_field == "foo"
+        assert bundle["fake"].service.other_field == "bar"
+
+
+def test_load_services_bad_files():
+    ss = service_store.ServiceStore(model.ServiceBundle, "v1")
+    with patch("eosc_service_catalogue.service_store.files") as m_files:
+        iterdir = Mock()
+        m_files.return_value = iterdir
+        # empty file
+        iterdir.iterdir.return_value = [MockFile("test.yaml", "")]
+        assert ss.load_services() == {}
+        # bad yaml
+        iterdir.iterdir.return_value = [MockFile("test.yaml", "a\nb\nd")]
+        assert ss.load_services() == {}
+        # bad object
+        iterdir.iterdir.return_value = [MockFile("test.yaml", "service: {foo: bar}")]
+        assert ss.load_services() == {}
 
 
 def test_validate_services_data():

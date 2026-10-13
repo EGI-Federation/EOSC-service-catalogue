@@ -17,12 +17,15 @@ We add an additional getter for a single service
 /service/{service_id} // Get a service by its id
 """
 
+import logging
 from typing import Literal, Optional, Union, get_args, get_origin
 
 from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel
 
 from . import service_store
+
+logger = logging.getLogger(__name__)
 
 
 def _sortable_fields(svc_class: type[BaseModel]):
@@ -56,6 +59,7 @@ def create_router(
     svc_class: type[BaseModel],
 ) -> APIRouter:
     """Create a router instance with specific model class"""
+    logger.info(f"Building FastAPI router for version {version}")
     router = APIRouter()
     svc_store = service_store.ServiceStore(bundle_class, version)
     allowed_sort_fields = _sortable_fields(svc_class)

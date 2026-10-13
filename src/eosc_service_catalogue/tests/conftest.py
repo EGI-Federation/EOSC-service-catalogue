@@ -1,4 +1,5 @@
 import pytest
+import yaml
 
 from ..eosc_service_catalogues_specs import catalogue_model_v1
 from ..eosc_service_catalogues_specs import catalogue_model_v2 as model
@@ -123,3 +124,18 @@ def bundle_v1(mock_service_v1, mock_service_2_v1):
         mock_service_v1.id: mock_service_v1,
         mock_service_2_v1.id: mock_service_2_v1,
     }
+
+
+@pytest.fixture
+def mock_bundle_yaml():
+    return yaml.dump(
+        {
+            "id": "fake",
+            "service": {
+                "id": "fake",
+                "versioned_field__foo": "foo",
+                "versioned_field__other_version": "fail",
+                "other_field": "bar",
+            },
+        }
+    )

@@ -66,6 +66,25 @@ def test_services_endpoints():
     prefixed_services_endpoint_test("/v2")
 
 
+def test_pagination_with_nonzero_from():
+    """Test that pagination metadata correctly returns the from parameter when it's not zero"""
+    client = TestClient(app)
+
+    # Test with from=2 and quantity=3 - should return {"from": 2, "to": 5}
+    response = client.get("/services?from=2&quantity=3")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["from"] == 2
+    assert data["to"] == 5
+
+    # Test with from=5 and quantity=2 - should return {"from": 5, "to": 7}
+    response = client.get("/services?from=5&quantity=2")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["from"] == 5
+    assert data["to"] == 7
+
+
 def prefixed_services_endpoint_no_results_test(prefix):
     """Test the /services endpoint with various parameters"""
     client = TestClient(app)

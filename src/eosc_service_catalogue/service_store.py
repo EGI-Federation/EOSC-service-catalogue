@@ -37,9 +37,9 @@ def _service_sorter(sort_field: str | None = ""):
 
 
 class ServiceStore:
-    def __init__(self, service_class: type[BaseModel], version: str = "v1"):
+    def __init__(self, bundle_class: type[BaseModel], version: str = "v1"):
         self.bundle: dict[str, object] = {}
-        self.service_class = service_class
+        self.bundle_class = bundle_class
         self.version = version
 
     def load_services(self) -> dict:
@@ -64,7 +64,7 @@ class ServiceStore:
                     service.update(updated_fields)
                     for field in fields_to_remove:
                         service.pop(field)
-                    svc = self.service_class.model_validate(svc_yaml)
+                    svc = self.bundle_class.model_validate(svc_yaml)
                     self.bundle[svc_yaml.get("id")] = svc
                 except Exception as e:
                     print(f"Error processing {svc_file}: {e}")

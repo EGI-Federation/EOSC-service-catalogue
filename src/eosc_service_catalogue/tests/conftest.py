@@ -89,7 +89,7 @@ def mock_service_v1():
 
 
 @pytest.fixture
-def mock_service_2_v2():
+def mock_service_2_v1():
     return catalogue_model_v1.ServiceBundle(
         id="test-id-2",
         service=catalogue_model_v1.Service(
@@ -118,8 +118,8 @@ def mock_service_2_v2():
 
 
 @pytest.fixture
-def bundle_v1(mock_service_v1, mock_service_2_v2):
+def bundle_v1(mock_service_v1, mock_service_2_v1):
     return {
         mock_service_v1.id: mock_service_v1,
-        mock_service_2_v2.id: mock_service_2_v2,
+        mock_service_2_v1.id: mock_service_2_v1,
     }

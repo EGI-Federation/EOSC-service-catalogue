@@ -104,6 +104,8 @@ def create_router(
                 }
             )
         start = from_ if from_ else 0
+        if quantity is None:
+            quantity = -1
         quantity = quantity if quantity != -1 else total
         end = min(start + quantity, total) if start < total else start
         return response_class(

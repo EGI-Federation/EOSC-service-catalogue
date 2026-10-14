@@ -49,8 +49,10 @@ service:
   logo: https://cdn.egi.eu/app/uploads/2022/06/egi-icon-check-in.png
   scientificDomains:
     - scientificDomain: scientific_domain-generic
-  categories:
+  categories__v1:
     - category: category-security_and_operations-security_and_identity
+  categories__v2:
+    - category: service_classification-infrastructure_operations_services
   targetUsers:
     - target_user-research_communities
     - target_user-research_groups

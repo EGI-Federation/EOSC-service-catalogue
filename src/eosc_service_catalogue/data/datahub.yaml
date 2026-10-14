@@ -30,8 +30,10 @@ service:
   logo: https://cdn.egi.eu/app/uploads/2022/06/egi-icon-datahub.png
   scientificDomains:
     - scientificDomain: scientific_domain-generic
-  categories:
+  categories__v1:
     - category: category-processing_and_analysis-data_management
+  categories__v2:
+    - category: service_classification-storage_services
   targetUsers:
     - target_user-research_communities
     - target_user-research_groups

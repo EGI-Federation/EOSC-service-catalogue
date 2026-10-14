@@ -50,6 +50,8 @@ jobs:
           VALIDATE_TRIVY: false
           # Fail on errors
           DISABLE_ERRORS: false
+          # Do not try to lint code from EEN
+          FILTER_REGEX_EXCLUDE: ".*/eosc_service_catalogues_specs/.*"
 
       - name: Link Checker
         id: lychee

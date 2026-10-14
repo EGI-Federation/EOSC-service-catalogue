@@ -25,8 +25,11 @@ service:
   logo: https://cdn.egi.eu/app/uploads/2022/06/egi-icon-fitsm-training.png
   scientificDomains:
     - scientificDomain: scientific_domain-generic
-  categories:
+  categories__v1:
     - category: category-training_and_support-education_and_training
+  categories__v2:
+    - category: service_classification-training_skills_development
+    - category: service_classification-research_support_collaboration
   targetUsers:
     - target_user-research_communities
     - target_user-research_groups

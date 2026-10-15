@@ -18,7 +18,7 @@ USER 9999
 
 # Install httpie for the healthcheck
 RUN uv tool install httpie
-HEALTHCHECK CMD uv tool run --from httpie http localhost:8080
+HEALTHCHECK CMD ["uv", "tool", "run", "--from", "httpie", "http", "localhost:8080"]
 
 # Copy the application into the container.
 COPY --chown=python . /app

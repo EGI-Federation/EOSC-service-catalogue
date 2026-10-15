@@ -12,12 +12,13 @@ RUN apt-get -y update &&  \
     -y tini && \
     rm -rf /var/lib/apt/lists/*
 
-RUN useradd -m python
-USER python
+RUN useradd -m python -u 9999
+# python user just created
+USER 9999
 
 # Install httpie for the healthcheck
 RUN uv tool install httpie
-HEALTHCHECK CMD uv tool run --from httpie http localhost:8080
+HEALTHCHECK CMD ["uv", "tool", "run", "--from", "httpie", "http", "localhost:8080"]
 
 # Copy the application into the container.
 COPY --chown=python . /app
@@ -30,4 +31,4 @@ EXPOSE 8080/tcp
 
 # Run the application.
 ENTRYPOINT ["tini", "--"]
-CMD ["/app/.venv/bin/fastapi", "run", "--port", "8080", "--host", "0.0.0.0", "--forwarded-allow-ips=*"] 
+CMD ["/app/.venv/bin/fastapi", "run", "--port", "8080", "--host", "0.0.0.0", "--forwarded-allow-ips=*"]

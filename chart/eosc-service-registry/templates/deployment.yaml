@@ -32,7 +32,7 @@ spec:
       automountServiceAccountToken: false
       {{- if .Values.imageCredentials.username }}
       imagePullSecrets:
-        - name: eosc-registry-pullsecrets
+        - name: {{ include "eosc-service-registry.fullname" . }}-pullsecrets
       {{- end }}
       {{- with .Values.podSecurityContext }}
       securityContext:

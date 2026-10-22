@@ -98,29 +98,27 @@ def create_router(
         bundle = svc_store.filtered_services(keyword, sort_field, order == "desc")
         total = len(bundle)
         if not total:
-            return response_class(
-                # using this to avoid "from" as it's reserved in python
-                **{
-                    "total": 0,
-                    "from_": 0,
-                    "to": 0,
-                    "results": [],
-                }
-            )
+            # using this to avoid "from" as it's reserved in python
+            response = {
+                "total": 0,
+                "from_": 0,
+                "to": 0,
+                "results": [],
+            }
+            return response_class(**response)
         start = from_ if from_ else 0
         if quantity is None:
             quantity = -1
         quantity = quantity if quantity != -1 else total
         end = min(start + quantity, total) if start < total else start
-        return response_class(
-            # using this to avoid "from" as it's reserved in python
-            **{
-                "total": total,
-                "from": start,
-                "to": end,
-                "results": bundle[start:end],
-            }
-        )
+        response = {
+            "total": total,
+            "from": start,
+            "to": end,
+            "results": bundle[start:end],
+        }
+        # using this to avoid "from" as it's reserved in python
+        return response_class(**response)
 
     @router.get("/service/{service_id}", response_model=bundle_class)
     def service(service_id: str):

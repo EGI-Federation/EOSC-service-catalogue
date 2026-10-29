@@ -1,4 +1,4 @@
-FROM python:3.14.7-slim
+FROM python:3.15.0-slim
 
 # Install uv.
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
@@ -12,12 +12,12 @@ RUN apt-get -y update &&  \
     -y tini && \
     rm -rf /var/lib/apt/lists/*
 
-RUN useradd -m python
-USER python
+RUN useradd -m -u 9999 python
+USER 9999
 
 # Install httpie for the healthcheck
 RUN uv tool install httpie
-HEALTHCHECK CMD uv tool run --from httpie http localhost:8080
+HEALTHCHECK CMD ["uv", "tool", "run", "--from", "httpie", "http", "localhost:8080"]
 
 # Copy the application into the container.
 COPY --chown=python . /app
